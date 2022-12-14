@@ -23,8 +23,8 @@ fun Application.configureHTTP() {
         allowHeader("MyCustomHeader")
         anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
     }
-    swaggerUI(path = "openapi")
-    openAPI(path = "openapi")
+
+
     install(HSTS) {
         includeSubDomains = true
     }
