@@ -27,12 +27,16 @@ fun Application.configureTemplating() {
         }
         get("/styles.css") {
             call.respondCss {
-                body {
-                    backgroundColor = Color.darkBlue
-                    margin(0.px)
+                rule("hContainer") {
+                    color = Color.beige
                 }
-                rule("h1.page-title") {
-                    color = Color.white
+                ".hContainer" {
+                    display = Display.flex
+                    justifyContent = JustifyContent.lastBaseline
+                    alignContent = Align.center
+                }
+                input {
+                    height = 30.px
                 }
             }
         }

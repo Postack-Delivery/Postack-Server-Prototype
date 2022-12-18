@@ -1,5 +1,7 @@
 package com.postack.plugins
 
+import com.postack.domain.controller.ProductController
+import com.postack.routes.productRoutes
 import io.ktor.server.routing.*
 import io.ktor.http.*
 import io.ktor.resources.*
@@ -14,6 +16,8 @@ import io.ktor.server.request.*
 import io.ktor.server.resources.*
 import io.ktor.server.resources.Resources
 import io.ktor.server.routing.get
+import kotlinx.css.p
+import org.koin.ktor.ext.inject
 
 fun Application.configureRouting() {
 
@@ -29,10 +33,9 @@ fun Application.configureRouting() {
     }
 
     routing {
-        get("/") {
-            call.respondText("Hello World!")
-        }
-        // Static plugin. Try to access `/static/index.html`
+        val productController: ProductController by inject()
+        productRoutes(productController = productController)
+
         static("/static") {
             resources("static")
         }
