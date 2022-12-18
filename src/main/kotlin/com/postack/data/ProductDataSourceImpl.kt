@@ -21,7 +21,7 @@ class ProductDataSourceImpl(
 
     override suspend fun getAllProducts(page: Int): List<Product> {
         return productsCollection.find()
-            .skip(12 * page - 1)
+            .skip(12 * (page - 1))
             .limit(12).toList()
     }
 
@@ -34,7 +34,7 @@ class ProductDataSourceImpl(
 
     override suspend fun getProductsBySubCategory(subCategory: String, page: Int): List<Product> {
         return productsCollection.find(Product::subCategory eq subCategory)
-            .skip(12 * page - 1)
+            .skip(12 * (page - 1))
             .limit(12)
             .toList()
     }

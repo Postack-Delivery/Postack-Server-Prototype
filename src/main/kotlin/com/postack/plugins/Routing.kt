@@ -2,6 +2,7 @@ package com.postack.plugins
 
 import com.postack.domain.controller.ProductController
 import com.postack.routes.productRoutes
+import com.postack.routes.productUploadRoutes
 import io.ktor.server.routing.*
 import io.ktor.http.*
 import io.ktor.resources.*
@@ -35,7 +36,7 @@ fun Application.configureRouting() {
     routing {
         val productController: ProductController by inject()
         productRoutes(productController = productController)
-
+        productUploadRoutes()
         static("/static") {
             resources("static")
         }
