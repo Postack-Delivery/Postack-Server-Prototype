@@ -31,7 +31,7 @@ fun Application.configureHTTP() {
     install(CachingHeaders) {
         options { call, outgoingContent ->
             when (outgoingContent.contentType?.withoutParameters()) {
-                ContentType.Text.CSS -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60))
+                ContentType.Text.CSS ->  CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 60))// 24 * 60 * 60 for a day
                 else -> null
             }
         }

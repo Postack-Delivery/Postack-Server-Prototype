@@ -7,6 +7,7 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.postack.plugins.*
+import io.ktor.server.plugins.doublereceive.*
 import org.koin.ktor.plugin.Koin
 
 fun main() {
@@ -23,7 +24,9 @@ fun Application.module() {
                 controllerModule
             )
         )
-
+    }
+    install(DoubleReceive) {
+        cacheRawRequest = false
     }
     configureSecurity()
     configureHTTP()
