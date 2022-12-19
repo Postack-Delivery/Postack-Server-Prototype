@@ -24,10 +24,11 @@ fun Application.configureHTTP() {
         anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
     }
 
-
+    /* Enforce HTTPS
     install(HSTS) {
         includeSubDomains = true
-    }
+    }*/
+
     install(CachingHeaders) {
         options { call, outgoingContent ->
             when (outgoingContent.contentType?.withoutParameters()) {

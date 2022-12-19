@@ -3,6 +3,9 @@ package com.postack.plugins
 import com.postack.domain.controller.ProductController
 import com.postack.routes.productRoutes
 import com.postack.routes.productUploadRoutes
+import com.postack.util.Environment
+import com.postack.util.Environment.*
+import com.postack.util.getProjectRoot
 import io.ktor.server.routing.*
 import io.ktor.http.*
 import io.ktor.resources.*
@@ -36,7 +39,7 @@ fun Application.configureRouting() {
 
     routing {
         val productController: ProductController by inject()
-        swaggerUI(path = "/api/v1", swaggerFile = "/root/Postack-Server/${Paths.get("src/main/resources/static")}/documentation.yaml") {
+        swaggerUI(path = "/api/v1", swaggerFile = "${getProjectRoot(PRODUCTION)}${Paths.get("src/main/resources/static")}/documentation.yaml") {
             version = "4.15.5"
 
         }
@@ -55,3 +58,5 @@ fun Application.configureRouting() {
 @Serializable
 @Resource("/articles")
 class Articles(val sort: String? = "new")
+
+
