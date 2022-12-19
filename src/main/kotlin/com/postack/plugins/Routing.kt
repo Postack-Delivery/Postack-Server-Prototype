@@ -19,6 +19,7 @@ import io.ktor.server.resources.*
 import io.ktor.server.resources.Resources
 import io.ktor.server.routing.get
 import org.koin.ktor.ext.inject
+import java.nio.file.Paths
 
 fun Application.configureRouting() {
 
@@ -35,7 +36,7 @@ fun Application.configureRouting() {
 
     routing {
         val productController: ProductController by inject()
-        swaggerUI(path = "/api/v1", swaggerFile = "static/documentation.yaml") {
+        swaggerUI(path = "/api/v1", swaggerFile = "${Paths.get("src/main/resources/static")}/documentation.yaml") {
             version = "4.15.5"
 
         }
