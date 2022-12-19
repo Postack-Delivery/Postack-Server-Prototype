@@ -7,11 +7,43 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.postack.plugins.*
+import com.postack.util.Environment
+import com.postack.util.Environment.*
+import com.postack.util.getProjectRoot
+import io.ktor.network.tls.certificates.*
 import io.ktor.server.plugins.doublereceive.*
 import org.koin.ktor.plugin.Koin
+import org.slf4j.LoggerFactory
+import java.io.File
+import java.nio.file.Paths
 
 fun main() {
-    embeddedServer(Netty, port = 8484, host = "0.0.0.0", module = Application::module)
+    val keyStoreFile = File("${getProjectRoot(PRODUCTION)}${Paths.get("src/main/resources/static")}/keystore.jks")
+    val keyStore = buildKeyStore {
+        certificate("postack") {
+            password = "123456"
+            domains = listOf("127.0.0.1", "10.0.0.150", "45.79.129.79", "localhost")
+        }
+    }
+    keyStore.saveToFile(keyStoreFile, "123456")
+
+    val environment = applicationEngineEnvironment {
+        log = LoggerFactory.getLogger("ktor.application")
+        connector {
+            port = 8080
+        }
+        sslConnector(
+            keyStore = keyStore,
+            keyAlias = "postack",
+            keyStorePassword = { "123456".toCharArray() },
+            privateKeyPassword = { "123456".toCharArray() }) {
+            port = 8443
+            keyStorePath = keyStoreFile
+        }
+        module(Application::module)
+    }
+
+    embeddedServer(Netty, environment = environment)
         .start(wait = true)
 }
 
