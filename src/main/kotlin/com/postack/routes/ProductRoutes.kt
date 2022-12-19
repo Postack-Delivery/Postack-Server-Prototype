@@ -68,8 +68,8 @@ fun Route.productRoutes(productController: ProductController) {
             )
         }
 
-        get("/{subCategory}") {
-            val subCategory = call.parameters["subCategory"].toString()
+        get("/{sub-category}") {
+            val subCategory = call.parameters["sub-category"].toString()
             val page = call.request.queryParameters["page"]?.toInt() ?: 1
             call.respond(
                 HttpStatusCode.OK,
@@ -77,8 +77,8 @@ fun Route.productRoutes(productController: ProductController) {
             )
         }
 
-        get("/search/{searchTerm}") {
-            val searchTerm = call.parameters["searchTerm"].toString()
+        get("/search/{search-term}") {
+            val searchTerm = call.parameters["search-term"].toString()
             val page = call.request.queryParameters["page"]?.toInt() ?: 1
             call.respond(
                 HttpStatusCode.OK,

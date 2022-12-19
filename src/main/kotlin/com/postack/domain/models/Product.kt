@@ -15,6 +15,7 @@ data class Product(
     val id: String = ObjectId().toString(),
     val name: String = "",
     val price: Double = 0.0,
+    val rating: Double = 3.5,
     val image: String = "",
     val description: String = "",
     val weight: Double = 0.0,

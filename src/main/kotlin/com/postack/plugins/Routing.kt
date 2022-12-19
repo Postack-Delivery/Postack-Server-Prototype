@@ -12,12 +12,12 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.webjars.*
 import java.time.*
 import io.ktor.server.application.*
+import io.ktor.server.plugins.swagger.*
 import io.ktor.server.response.*
 import io.ktor.server.request.*
 import io.ktor.server.resources.*
 import io.ktor.server.resources.Resources
 import io.ktor.server.routing.get
-import kotlinx.css.p
 import org.koin.ktor.ext.inject
 
 fun Application.configureRouting() {
@@ -35,6 +35,10 @@ fun Application.configureRouting() {
 
     routing {
         val productController: ProductController by inject()
+        swaggerUI(path = "/api/v1", swaggerFile = "static/documentation.yaml") {
+            version = "4.15.5"
+
+        }
         productRoutes(productController = productController)
         productUploadRoutes()
         static("/static") {
