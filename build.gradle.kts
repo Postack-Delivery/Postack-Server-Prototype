@@ -15,7 +15,7 @@ version = "0.0.1"
 application {
     mainClass.set("com.postack.ApplicationKt")
 
-    val isDevelopment: Boolean = project.ext.has("development")
+    val isDevelopment: Boolean = project.ext.has("production")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
