@@ -24,9 +24,6 @@ fun Application.configureHTTP() {
         anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
     }
 
-    install(HSTS) {
-        includeSubDomains = true
-    }
 
     install(CachingHeaders) {
         options { call, outgoingContent ->
