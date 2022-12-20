@@ -3,6 +3,7 @@ package com.postack.plugins
 import com.postack.domain.controller.ProductController
 import com.postack.routes.productRoutes
 import com.postack.routes.productUploadRoutes
+import com.postack.util.Environment.DEVELOPMENT
 import com.postack.util.Environment.PRODUCTION
 import com.postack.util.getProjectRoot
 import io.ktor.http.*
@@ -25,7 +26,7 @@ fun Application.configureRouting() {
 
     routing {
         val productController: ProductController by inject()
-        swaggerUI(path = "/api/v1", swaggerFile = "${getProjectRoot(PRODUCTION)}${Paths.get("src/main/resources/static")}/documentation.yaml") {
+        swaggerUI(path = "/api/v1", swaggerFile = "${getProjectRoot(DEVELOPMENT)}${Paths.get("src/main/resources/static")}/documentation.yaml") {
             version = "4.15.5"
 
         }
