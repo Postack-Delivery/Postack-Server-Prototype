@@ -83,7 +83,7 @@ fun main() {
     val environment = applicationEngineEnvironment {
         log = LoggerFactory.getLogger("ktor.application")
         connector {
-            port = 8080
+            port = 80
         }
         sslConnector(
             keyStore = keyStore,
@@ -97,7 +97,7 @@ fun main() {
     }
 //    HttpsServer.createServer(Application::module)
 //        .start(wait = true)
-    embeddedServer(Jetty, port = 8080, module = Application::module)
+    embeddedServer(Jetty,environment)
         .start(wait = true)
 }
 
