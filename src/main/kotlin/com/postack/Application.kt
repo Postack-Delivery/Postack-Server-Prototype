@@ -30,7 +30,7 @@ fun main() {
     val environment = applicationEngineEnvironment {
         log = LoggerFactory.getLogger("ktor.application")
         connector {
-            port = 80
+            port = 8080
         }
         sslConnector(
             keyStore = keyStore,
