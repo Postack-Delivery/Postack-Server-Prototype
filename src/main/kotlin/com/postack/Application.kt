@@ -22,7 +22,7 @@ fun main() {
     val keyStore = buildKeyStore {
         certificate("postack") {
             password = "123456"
-            domains = listOf("127.0.0.1", "45.79.129.79", "localhost")
+            domains = listOf("127.0.0.1", "45.79.129.79", "localhost", "postack.dev")
         }
     }
     keyStore.saveToFile(keyStoreFile, "123456")
