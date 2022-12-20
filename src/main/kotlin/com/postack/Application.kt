@@ -97,7 +97,7 @@ fun main() {
     }
 //    HttpsServer.createServer(Application::module)
 //        .start(wait = true)
-    embeddedServer(Netty, environment)
+    embeddedServer(Netty, port = 80, module = Application::module)
         .start(wait = true)
 }
 
