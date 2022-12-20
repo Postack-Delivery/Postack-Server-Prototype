@@ -65,11 +65,17 @@ class HttpsServer {
 }
 fun main() {
 
-    val keyStoreFile = File("${getProjectRoot(PRODUCTION)}${Paths.get("src/main/resources/static")}/keystore.jks")
+    val keyStoreFile = File("build/keystore.jks")
     val keyStore = buildKeyStore {
-        certificate("postack") {
-            password = "123456"
-            domains = listOf("127.0.0.1", "45.79.129.79", "localhost", "postack.dev")
+        certificate("sampleAlias") {
+            password = "foobar"
+            domains = listOf(
+                "127.0.0.1",
+                "10.0.0.150",
+                "localhost",
+                "45.79.129.79",
+                "postack.dev"
+            )
         }
     }
     keyStore.saveToFile(keyStoreFile, "123456")
@@ -77,13 +83,13 @@ fun main() {
     val environment = applicationEngineEnvironment {
         log = LoggerFactory.getLogger("ktor.application")
         connector {
-            port = 80
+            port = 8080
         }
         sslConnector(
             keyStore = keyStore,
-            keyAlias = "postack",
+            keyAlias = "sampleAlias",
             keyStorePassword = { "123456".toCharArray() },
-            privateKeyPassword = { "123456".toCharArray() }) {
+            privateKeyPassword = { "foobar".toCharArray() }) {
             port = 443
             keyStorePath = keyStoreFile
         }
