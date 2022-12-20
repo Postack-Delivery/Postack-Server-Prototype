@@ -65,7 +65,7 @@ class HttpsServer {
 }
 fun main() {
 
-    val keyStoreFile = File("${getProjectRoot(DEVELOPMENT)}${Paths.get("src/main/resources/static")}/keystore.jks")
+    val keyStoreFile = File("${getProjectRoot(PRODUCTION)}${Paths.get("src/main/resources/static")}/keystore.jks")
     val keyStore = buildKeyStore {
         certificate("postack") {
             password = "123456"
