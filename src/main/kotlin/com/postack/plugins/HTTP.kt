@@ -10,25 +10,6 @@ import io.ktor.server.plugins.defaultheaders.*
 
 fun Application.configureHTTP() {
     install(CORS) {
-        allowHost("45.79.129.79")
-        allowHost("postack.dev", schemes = listOf("http", "https"))
-        allowHost("client-host")
-        allowHost("client-host:80")
-        allowHost("client-host", subDomains = listOf("en", "de", "es"))
-        allowHost("client-host", schemes = listOf("http", "https"))
-        allowMethod(HttpMethod.Options)
-        allowMethod(HttpMethod.Put)
-        allowMethod(HttpMethod.Delete)
-        allowMethod(HttpMethod.Patch)
-        allowMethod(HttpMethod.Get)
-        allowHeader(HttpHeaders.Authorization)
-        allowHeader(HttpHeaders.Referrer)
-        allowHeader(HttpHeaders.AccessControlAllowOrigin)
-        allowHeader(HttpHeaders.ContentType)
-        allowNonSimpleContentTypes = true
-        allowCredentials = true
-        allowSameOrigin = true
-        allowXHttpMethodOverride()
         anyHost()
     }
 
