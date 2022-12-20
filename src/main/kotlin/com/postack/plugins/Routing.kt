@@ -26,7 +26,7 @@ fun Application.configureRouting() {
 
     routing {
         val productController: ProductController by inject()
-        swaggerUI(path = "/api/v1", swaggerFile = "${getProjectRoot(DEVELOPMENT)}${Paths.get("src/main/resources/static")}/documentation.yaml") {
+        swaggerUI(path = "/api/v1", swaggerFile = "${getProjectRoot(PRODUCTION)}${Paths.get("src/main/resources/static")}/documentation.yaml") {
             version = "4.15.5"
 
         }
