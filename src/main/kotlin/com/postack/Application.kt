@@ -97,7 +97,7 @@ fun main() {
     }
 //    HttpsServer.createServer(Application::module)
 //        .start(wait = true)
-    embeddedServer(Netty, port = 80, module = Application::module)
+    embeddedServer(Netty, port = 8080, module = Application::module)
         .start(wait = true)
 }
 
@@ -111,11 +111,11 @@ fun Application.module() {
             )
         )
     }
+    configureHTTP()
     install(DoubleReceive) {
         cacheRawRequest = false
     }
     configureSecurity()
-    configureHTTP()
     configureSockets()
     configureSerialization()
     configureTemplating()
