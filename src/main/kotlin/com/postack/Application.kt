@@ -5,13 +5,13 @@ import com.postack.di.dataSourceModule
 import com.postack.di.mainModule
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
-import io.ktor.server.netty.*
 import com.postack.plugins.*
 import com.postack.util.Environment
 import com.postack.util.Environment.*
 import com.postack.util.getProjectRoot
 import io.ktor.network.tls.certificates.*
 import io.ktor.network.tls.extensions.*
+import io.ktor.server.jetty.*
 import io.ktor.server.plugins.doublereceive.*
 import io.ktor.server.routing.*
 import kotlinx.html.A
@@ -25,7 +25,7 @@ class HttpsServer {
     companion object {
         val pass = "abcd1234"
 
-        fun createServer(app: Application.() -> Unit): NettyApplicationEngine {
+        fun createServer(app: Application.() -> Unit): JettyApplicationEngine {
             val alias = "certificateAlias"
 
             val keystore = buildKeyStore {
@@ -37,7 +37,7 @@ class HttpsServer {
                 }
             }
 
-            val server = embeddedServer(Netty, applicationEngineEnvironment {
+            val server = embeddedServer(Jetty, applicationEngineEnvironment {
                 sslConnector(keystore,
                     alias,
                     { "".toCharArray() },
@@ -97,7 +97,7 @@ fun main() {
     }
 //    HttpsServer.createServer(Application::module)
 //        .start(wait = true)
-    embeddedServer(Netty, port = 8080, module = Application::module)
+    embeddedServer(Jetty, port = 8080, module = Application::module)
         .start(wait = true)
 }
 
