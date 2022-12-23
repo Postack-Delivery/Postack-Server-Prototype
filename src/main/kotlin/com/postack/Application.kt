@@ -10,12 +10,11 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.jetty.*
 import io.ktor.server.plugins.doublereceive.*
+import io.ktor.server.plugins.partialcontent.*
 import io.ktor.server.routing.*
 import org.koin.ktor.plugin.Koin
 import org.slf4j.LoggerFactory
 import java.io.File
-import java.io.FileInputStream
-import java.security.KeyStore
 
 fun main() {
 
@@ -68,6 +67,7 @@ fun Application.module() {
         )
     }
     configureHTTP()
+    install(PartialContent)
     install(DoubleReceive) {
         cacheRawRequest = false
     }
