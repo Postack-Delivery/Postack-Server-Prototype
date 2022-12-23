@@ -52,6 +52,9 @@ fun main() {
     }
 //    embeddedServer(Jetty, port = 80, host = "45.79.129.79", module = Application::module)
 //        .start(wait = true)
+    embeddedServer(Jetty, environment)
+        .start(wait = true)
+
 }
 
 fun Application.module() {
