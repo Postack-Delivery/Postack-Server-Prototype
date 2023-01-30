@@ -21,6 +21,9 @@ fun Application.configureTemplating() {
                 input {
                     height = 30.px
                 }
+                ul {
+                    paddingLeft = 0.rem
+                }
             }
         }
     }

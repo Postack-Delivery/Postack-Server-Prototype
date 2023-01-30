@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory
 import java.io.File
 
 fun main() {
-
-    val keyStoreFile = File("/etc/letsencrypt/live/www.postack.dev/keystore.jks")
+// "/etc/letsencrypt/live/www.postack.dev/keystore.jks"
+    val keyStoreFile = File("Users/mwband/Repository/Web/Personal/PeaceWork/Postack-Server/src/main/resources/static")
 
     val keyStore = buildKeyStore {
         certificate("postack") {
@@ -37,7 +37,7 @@ fun main() {
     val environment = applicationEngineEnvironment {
         log = LoggerFactory.getLogger("ktor.application")
         connector {
-            port = 80
+            port = 8080
         }
         sslConnector(
             keyStore = keyStore,

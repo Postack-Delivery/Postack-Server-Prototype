@@ -23,11 +23,11 @@ fun Route.productRoutes(productController: ProductController) {
                         println("form item: ${part.name}")
                         when (part.name) {
                             C.PRODUCT_NAME -> productBuilder.name(part.value)
-                            C.PRODUCT_PRICE -> productBuilder.price(part.value.toDouble())
-                            C.PRODUCT_DESCRIPTION -> productBuilder.description(part.value)
-                            C.PRODUCT_WEIGHT -> productBuilder.weight(part.value.toDouble())
-                            C.PRODUCT_QUANTITY -> productBuilder.quantity(part.value.toInt())
-                            C.PRODUCT_UNIT_MEASURE -> productBuilder.unitMeasure(part.value)
+//                            C.PRODUCT_PRICE -> productBuilder.price(part.value.toDouble())
+//                            C.PRODUCT_DESCRIPTION -> productBuilder.description(part.value)
+//                            C.PRODUCT_WEIGHT -> productBuilder.weight(part.value.toDouble())
+//                            C.PRODUCT_QUANTITY -> productBuilder.quantity(part.value.toInt())
+//                            C.PRODUCT_UNIT_MEASURE -> productBuilder.unitMeasure(part.value)
                             C.PRODUCT_SUPPLIER -> productBuilder.supplier(part.value)
                             C.PRODUCT_CATEGORY -> productBuilder.category(part.value)
                             C.PRODUCT_SUB_CATEGORY -> productBuilder.subCategory(part.value)
@@ -37,7 +37,7 @@ fun Route.productRoutes(productController: ProductController) {
                     is PartData.FileItem -> {
                         val fileName = (part.originalFileName as String).lowercase().trim()
                         val fileBytes = part.streamProvider().readBytes()
-                        productBuilder.image("10.0.0.150:8484/static/img/$fileName")
+//                        productBuilder.image("10.0.0.150:8484/static/img/$fileName")
                         File("${Paths.get("src/main/resources/static/img")}/$fileName")
                             .writeBytes(fileBytes)
                     }
@@ -47,7 +47,7 @@ fun Route.productRoutes(productController: ProductController) {
             }
             val product = productBuilder.build()
             productController.addProduct(product)
-            call.respondText("${product.name} is uploaded to  with the image '${product.image}")
+//            call.respondText("${product.name} is uploaded to  with the image '${product.image}")
         }
 
 
