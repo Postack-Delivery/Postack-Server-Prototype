@@ -2,9 +2,8 @@ package com.postack.plugins
 
 import com.postack.domain.controller.ProductController
 import com.postack.routes.productRoutes
-import com.postack.routes.productUploadRoutes
+import com.postack.routes.dashboardRoutes
 import com.postack.util.Environment.DEVELOPMENT
-import com.postack.util.Environment.PRODUCTION
 import com.postack.util.getProjectRoot
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -35,7 +34,7 @@ fun Application.configureRouting() {
         }
 
         productRoutes(productController = productController)
-        productUploadRoutes()
+        dashboardRoutes(productController = productController)
         static("/static") {
             resources("static")
         }

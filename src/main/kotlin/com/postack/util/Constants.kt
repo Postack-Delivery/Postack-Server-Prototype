@@ -13,5 +13,6 @@ object C {
     const val PRODUCT_UNIT_MEASURE = "unit"
     const val PRODUCT_QUANTITY = "quantity"
     const val PRODUCT_IMAGE = "image"
+    const val PRODUCT_VARIANT = "variant"
 
 }

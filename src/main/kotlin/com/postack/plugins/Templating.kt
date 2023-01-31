@@ -8,6 +8,10 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.request.*
 import io.ktor.server.routing.*
+import kotlinx.css.properties.TextDecoration
+import kotlinx.css.properties.TextDecorationStyle
+import kotlinx.css.properties.textDecoration
+import java.io.File
 
 fun Application.configureTemplating() {
     routing {
@@ -18,14 +22,41 @@ fun Application.configureTemplating() {
                     justifyContent = JustifyContent.lastBaseline
                     alignContent = Align.center
                 }
-                input {
-                    height = 30.px
-                }
+
                 ul {
                     paddingLeft = 0.rem
                 }
+                ".width" {
+                    width = 120.px
+                    marginLeft = 9.px
+                    marginBottom = 25.px
+                }
+                ".topSpace" {
+                    paddingTop = 20.px
+                }
+
+                h6 {
+                    color = Color.black
+                }
+                span {
+                    color = Color.black
+                    textDecoration(style = TextDecorationStyle.unset)
+                }
+                body {
+                    backgroundColor = Color("#f8f9fa")
+                }
+                ".gray" {
+                    backgroundColor = Color("#f8f9fa")
+                }
+                ".thumbnail" {
+                    width = 173.px
+                    height = 173.px
+                }
+
             }
         }
+
+
     }
 }
 
