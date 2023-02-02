@@ -1,5 +1,8 @@
 function onSubmitVariants() {
-    window.alert("Hello World")
+    const result = JSON.parse(JSON.stringify(arguments[1].replaceAll('-', '"')));
+    window.alert("Hello " + result);
+    const arrayOfVariants = JSON.parse(result)
+    console.log(arrayOfVariants[0].id);
 }
 
 window.addEventListener('onCategoryChanged', (event) => {
@@ -9,78 +12,54 @@ window.addEventListener('onCategoryChanged', (event) => {
     }
     switch (event.detail["category"]) {
         case 'groceries':
-            const groceriesData = [{
-                id: 3,
-                name: "Breakfast",
-                value: "breakfast"
-            }, {
-                id: 8,
-                name: "Spices & Seasoning",
-                value: "spices"
-            }, {
-                id: 10,
-                name: "Treats & Snacks",
-                value: "treats"
-            },];
-            for (var i = 0; i < groceriesData.length; i++) {
+            const resGroceries = JSON.parse(JSON.stringify(event.detail["data"].replaceAll('-', '"')));
+            console.log("[RES]" +resGroceries);
+            const groceryCategories = JSON.parse(resGroceries).filter(category => category.category === "groceries")
+            console.log(groceryCategories);
+
+            for (var i = 0; i < groceryCategories.length; i++) {
                 var option = document.createElement("option");
-                option.text = groceriesData[i]["name"];
-                option.value = groceriesData[i]["value"];
+                option.text = groceryCategories[i].name;
+                option.value = groceryCategories[i].name.split(' ')[0];
                 selector.add(option);
             }
             break;
         case 'body':
-            const bodyData = [{
-                id: 3,
-                name: "Body & Bath",
-                value: "body"
-            },];
-            for (var i = 0; i < bodyData.length; i++) {
+            let resBody = JSON.parse(JSON.stringify(event.detail["data"].replaceAll('-', '"')));
+            console.log("[RES]" +resBody);
+            const bodyCategories = JSON.parse(resBody).filter(category => category.category === "body")
+            console.log(bodyCategories);
+
+            for (var i = 0; i < bodyCategories.length; i++) {
                 var option = document.createElement("option");
-                option.text = bodyData[i]["name"];
-                option.value = bodyData[i]["value"];
+                option.text = bodyCategories[i].name;
+                option.value = bodyCategories[i].name.split(' ')[0];
                 selector.add(option);
             }
             break;
         case 'beverages':
-            const beveragesData = [{
-                id: 3,
-                name: "Wine",
-                value: "wine"
-            }, {
-                id: 8,
-                name: "Whiskey & Spirits",
-                value: "whiskey"
-            }, {
-                id: 10,
-                name: "Soft Drinks",
-                value: "soft-drinks"
-            },];
-            for (var i = 0; i < beveragesData.length; i++) {
+            let resBeverages = JSON.parse(JSON.stringify(event.detail["data"].replaceAll('-', '"')));
+            console.log("[RES]" +resBeverages);
+            const beverageCategories = JSON.parse(resBeverages).filter(category => category.category === "beverages")
+            console.log(beverageCategories);
+
+            for (var i = 0; i < beverageCategories.length; i++) {
                 var option = document.createElement("option");
-                option.text = beveragesData[i]["name"];
-                option.value = beveragesData[i]["value"];
+                option.text = beverageCategories[i].name;
+                option.value = beverageCategories[i].name.split(' ')[0];
                 selector.add(option);
             }
             break;
         case 'cleaning':
-            const cleaningData = [{
-                id: 3,
-                name: "Detergents",
-                value: "detergents"
-            }, {
-                id: 8,
-                name: "Sprays",
-                value: "sprays"
-            }, {
-                id: 10,
-                name: "Treats & Snacks",
-                value: "treats"
-            },];
-            for (var i = 0; i < cleaningData.length; i++) {
+            let resCleaning = JSON.parse(JSON.stringify(event.detail["data"].replaceAll('-', '"')));
+            console.log("[RES]" +resCleaning);
+            const cleaningCategories = JSON.parse(resCleaning).filter(category => category.category === "cleaning")
+            console.log(cleaningCategories);
+
+            for (var i = 0; i < cleaningCategories.length; i++) {
                 var option = document.createElement("option");
-                option.text = cleaningData[i]["name"];
-                option.value = cleaningData[i]["value"];
+                option.text = cleaningCategories[i].name;
+                option.value = cleaningCategories[i].name.split(' ')[0];
                 selector.add(option);
             }
             break;

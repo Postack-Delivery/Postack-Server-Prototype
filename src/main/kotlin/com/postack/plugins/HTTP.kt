@@ -7,6 +7,7 @@ import io.ktor.server.plugins.cors.routing.*
 fun Application.configureHTTP() {
     install(CORS) {
         anyHost()
+        allowHeader("*")
     }
 
     install(Compression) {

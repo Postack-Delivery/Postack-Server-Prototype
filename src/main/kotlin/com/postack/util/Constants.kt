@@ -3,6 +3,7 @@ package com.postack.util
 object C {
     const val DATABASE = "postack_db"
     const val CONNECTION_URL = "mongodb+srv://Postack:Postack2022@postack.mqtqpxy.mongodb.net/?retryWrites=true&w=majority"
+
     const val PRODUCT_NAME = "name"
     const val PRODUCT_PRICE = "price"
     const val PRODUCT_DESCRIPTION = "description"
@@ -14,5 +15,9 @@ object C {
     const val PRODUCT_QUANTITY = "quantity"
     const val PRODUCT_IMAGE = "image"
     const val PRODUCT_VARIANT = "variant"
+
+    const val CATEGORY_NAME = PRODUCT_NAME
+    const val CATEGORY_SUBCATEGORY = PRODUCT_SUB_CATEGORY
+    const val CATEGORY_COVER = PRODUCT_IMAGE
 
 }

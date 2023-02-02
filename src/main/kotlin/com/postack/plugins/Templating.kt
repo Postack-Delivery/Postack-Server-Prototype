@@ -22,7 +22,12 @@ fun Application.configureTemplating() {
                     justifyContent = JustifyContent.lastBaseline
                     alignContent = Align.center
                 }
-
+                td {
+                    textAlign = TextAlign.center
+                }
+                th {
+                    textAlign = TextAlign.center
+                }
                 ul {
                     paddingLeft = 0.rem
                 }
@@ -38,9 +43,17 @@ fun Application.configureTemplating() {
                 h6 {
                     color = Color.black
                 }
-                span {
+                 span {
                     color = Color.black
                     textDecoration(style = TextDecorationStyle.unset)
+                }
+                ".btn-link" {
+                    textDecoration(style = TextDecorationStyle.unset)
+
+                }
+                ".btn-group-vertical" {
+                    alignContent = Align.flexStart
+                    verticalAlign = VerticalAlign.baseline
                 }
                 body {
                     backgroundColor = Color("#f8f9fa")
@@ -52,7 +65,9 @@ fun Application.configureTemplating() {
                     width = 173.px
                     height = 173.px
                 }
-
+                ".active" {
+                    fontWeight = FontWeight.bold
+                }
             }
         }
 

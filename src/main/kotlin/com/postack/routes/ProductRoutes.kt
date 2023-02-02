@@ -40,7 +40,7 @@ fun Route.productRoutes(productController: ProductController) {
                     is PartData.FileItem -> {
                         val fileName = (part.originalFileName as String).lowercase().trim()
                         val fileBytes = part.streamProvider().readBytes()
-                        productVariantBuilder.image("10.0.0.150:8484/static/img/$fileName")
+                        productVariantBuilder.image("/static/img/$fileName")
                         File("${Paths.get("src/main/resources/static/img")}/$fileName")
                             .writeBytes(fileBytes)
                     }
