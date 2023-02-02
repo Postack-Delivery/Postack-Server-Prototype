@@ -26,7 +26,9 @@ data class ProductVariant(
         private var unitMeasure: String = ""
         private var quantity: Int = 0
         fun price(price: Double) = apply { this.price = price }
+        fun uniqueName(uniqueName: String) = apply { this.uniqueName = uniqueName }
         fun image(image: String) = apply { this.image = image }
+
         fun description(description: String) = apply { this.description = description }
         fun weight(weight: Double) = apply { this.weight = weight }
         fun rating(rating: Double) = apply { this.rating = rating }
