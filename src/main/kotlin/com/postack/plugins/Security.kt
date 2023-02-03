@@ -1,27 +1,44 @@
 package com.postack.plugins
 
+import com.postack.util.C
 import io.ktor.server.auth.*
-import io.ktor.util.*
 import io.ktor.server.sessions.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
-import io.ktor.server.request.*
-import io.ktor.server.routing.*
+
+data class AdminSession(val name: String, val count: Int) : Principal
 
 fun Application.configureSecurity() {
-
-    data class MySession(val count: Int = 0)
     install(Sessions) {
-        cookie<MySession>("MY_SESSION") {
-            cookie.extensions["SameSite"] = "lax"
+        cookie<AdminSession>(C.ADMIN_USERNAME) {
+            cookie.path = "/"
+            cookie.maxAgeInSeconds = 60 * 30
         }
     }
 
-    routing {
-        get("/session/increment") {
-            val session = call.sessions.get<MySession>() ?: MySession()
-            call.sessions.set(session.copy(count = session.count + 1))
-            call.respondText("Counter is ${session.count}. Refresh to increment.")
+    install(Authentication) {
+        form(C.ADMIN_AUTH) {
+            userParamName = "username"
+            passwordParamName = "password"
+            validate { credentials ->
+                if (credentials.name.lowercase() == C.ADMIN_USERNAME && credentials.password == C.ADMIN_PASSWORD) {
+                    UserIdPrincipal(credentials.name)
+                } else {
+                    null
+                }
+            }
+        }
+        session<AdminSession>(C.ADMIN_SESSION) {
+            validate { session ->
+                if(session.name.lowercase().startsWith(C.ADMIN_USERNAME)) {
+                    session
+                } else {
+                    null
+                }
+            }
+            challenge {
+                call.respondRedirect(C.Route.LOGIN)
+            }
         }
     }
 }

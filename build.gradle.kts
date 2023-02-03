@@ -46,7 +46,7 @@ dependencies {
     implementation("io.ktor:ktor-server-double-receive:$ktor_version")
     implementation("io.ktor:ktor-network-tls-certificates:$ktor_version")
     implementation("io.ktor:ktor-server-partial-content:$ktor_version")
-    // KMongo
+    implementation("io.ktor:ktor-server-method-override:$ktor_version")
     implementation("org.litote.kmongo:kmongo:$kmongo_version")
     implementation("org.litote.kmongo:kmongo-coroutine:$kmongo_version")
 

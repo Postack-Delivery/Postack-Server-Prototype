@@ -14,7 +14,7 @@ import java.io.File
 import java.nio.file.Paths
 
 fun Route.productRoutes(productController: ProductController) {
-    route("/api/v1/products") {
+    route(C.Route.API.PRODUCTS) {
         post {
             val multipartData = call.receiveMultipart()
             val productBuilder = Product.Builder()

@@ -40,6 +40,13 @@ fun Application.configureTemplating() {
                     paddingTop = 20.px
                 }
 
+                "button.text-gray" {
+                    color = Color.gray
+                }
+                "button.active" {
+                    color = Color.black
+                }
+
                 h6 {
                     color = Color.black
                 }
@@ -49,7 +56,6 @@ fun Application.configureTemplating() {
                 }
                 ".btn-link" {
                     textDecoration(style = TextDecorationStyle.unset)
-
                 }
                 ".btn-group-vertical" {
                     alignContent = Align.flexStart
@@ -61,17 +67,17 @@ fun Application.configureTemplating() {
                 ".gray" {
                     backgroundColor = Color("#f8f9fa")
                 }
+
                 ".thumbnail" {
                     width = 173.px
                     height = 173.px
                 }
                 ".active" {
                     fontWeight = FontWeight.bold
+                    color = Color.black
                 }
             }
         }
-
-
     }
 }
 

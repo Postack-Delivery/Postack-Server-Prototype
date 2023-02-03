@@ -68,4 +68,15 @@ window.addEventListener('onCategoryChanged', (event) => {
     }
 });
 
-window.dispatchEvent(new CustomEvent("onCategoryChanged", {detail: {category: "groceries"}}));
+const triggerTabList = document.querySelectorAll('#v-pills-tab button')
+triggerTabList.forEach(triggerEl => {
+    const tabTrigger = new bootstrap.Tab(triggerEl)
+
+    triggerEl.addEventListener('click', event => {
+        event.preventDefault()
+        tabTrigger.show()
+    })
+})
+
+const triggerEl = document.querySelector('#v-pills-tab button[data-bs-target="#product-inventory"]')
+bootstrap.Tab.getInstance(triggerEl).show() //
