@@ -5,7 +5,9 @@ import com.postack.di.dataSourceModule
 import com.postack.di.mainModule
 import com.postack.plugins.*
 import com.postack.util.Environment.*
+import io.ktor.http.HttpHeaders.XHttpMethodOverride
 import io.ktor.network.tls.certificates.*
+import io.ktor.server.application.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.jetty.*
@@ -66,6 +68,7 @@ fun Application.module() {
             )
         )
     }
+
     configureHTTP()
     install(PartialContent)
     install(DoubleReceive) {

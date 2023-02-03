@@ -1,8 +1,7 @@
 package com.postack.routes
 
-import com.postack.domain.controller.ProductController
-import com.postack.domain.models.Product
 import com.postack.domain.models.ProductVariant
+import com.postack.util.C
 import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -11,7 +10,7 @@ import java.io.File
 import java.nio.file.Paths
 
 fun Route.supplierRoutes() {
-    route("/api/v1/suppliers") {
+    route(C.Route.API.SUPPLIERS) {
         post {
             val multipartData = call.receiveMultipart()
             val productVariantBuilder = ProductVariant.Builder()

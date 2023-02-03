@@ -16,7 +16,7 @@ import java.io.File
 import java.nio.file.Paths
 
 fun Route.categoryRoutes(categoryController: CategoryController) {
-    route("/api/v1/categories") {
+    route(C.Route.API.CATEGORIES) {
         post {
             val multipartData = call.receiveMultipart()
             val categoryBuilder = Category.Builder()
