@@ -2,8 +2,8 @@ package com.postack.routes.dashboard.components
 
 import kotlinx.html.*
 
-fun HTML.postackPageHeader(title: String) {
-    head {
+fun HTML.head(title: String) {
+    this@header.head {
         meta { charset = "utf-8" }
         title(title)
         meta {

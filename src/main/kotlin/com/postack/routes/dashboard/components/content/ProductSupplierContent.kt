@@ -1,8 +1,11 @@
 package com.postack.routes.dashboard.components.content
 
+import com.postack.domain.models.Supplier
+import com.postack.routes.dashboard.components.modals.tag
 import kotlinx.html.*
 
-fun DIV.productSupplierContent() {
+fun DIV.productSupplierContent(suppliers: List<Supplier>) {
+    tag("Product Supplier Content".uppercase())
     div(classes = "tab-pane fade") {
         id = "product-suppliers"
         role = "tabpanel"
@@ -28,7 +31,7 @@ fun DIV.productSupplierContent() {
                         }
                         td {
                             h6 {
-                                strong { +"Location" }
+                                strong { +"City" }
                             }
                         }
                         td {
@@ -42,6 +45,51 @@ fun DIV.productSupplierContent() {
                     }
                 }
                 tbody(classes = "table-group-divider") {
+                    suppliers.forEachIndexed { i, supplier ->
+                        tr {
+                            th {
+                                attributes["scope"] = "row"
+                                +"${i + 1}"
+                            }
+                            td {
+                                p {
+                                     +supplier.name
+                                }
+                            }
+                            td {
+                                p {
+                                    +supplier.location.city
+                                }
+                            }
+                            td {
+                                div(classes = "btn-group-vertical") {
+                                    role = "group"
+                                    button(classes = "btn btn-link") {
+                                        attributes["data-bs-toggle"] = "modal"
+                                        attributes["data-bs-target"] = "#editSupplierModal"
+                                        onClick="onSupplierEdit(${supplier})"
+
+                                        p(classes = "text-md-left") {
+                                            span {
+                                                i(classes = "fa fa-edit") {}
+                                                +" Edit"
+                                            }
+
+                                        }
+                                    }
+
+                                    button(classes = "btn btn-link") {
+                                        p(classes = "text-md-left") {
+                                            span {
+                                                i(classes = "fa fa-trash") {}
+                                                +" Delete"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                     tr {
                         td {
                             attributes["colspan"] = "3"
@@ -49,7 +97,7 @@ fun DIV.productSupplierContent() {
                         td {
                             button(classes = "btn btn-dark") {
                                 attributes["data-bs-toggle"] = "modal"
-                                attributes["data-bs-target"] = "#createCategoryModal"
+                                attributes["data-bs-target"] = "#addSupplierModal"
                                 i(classes = "fa fa-plus-circle") {}
                                 +" Add Supplier"
                             }

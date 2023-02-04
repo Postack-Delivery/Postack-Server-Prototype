@@ -46,4 +46,16 @@ data class ProductVariant(
             rating = rating
         )
     }
+    data class JsVariant(
+        val id: String,
+        val name: String
+    ) {
+        override fun toString(): String {
+            return "{-id-: -$id-, -name-: -$name-}"
+        }
+    }
+    fun toJsVariant() = JsVariant(
+        id = id,
+        name = uniqueName
+    )
 }

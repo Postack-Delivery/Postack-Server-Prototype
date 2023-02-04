@@ -1,20 +1,17 @@
 package com.postack.routes
 
-import com.postack.routes.dashboard.components.postackPageHeader
+import com.postack.routes.dashboard.components.head
 import com.postack.util.C
 import io.ktor.server.application.*
 import io.ktor.server.html.*
 import io.ktor.server.routing.*
-import kotlinx.css.div
-import kotlinx.css.form
 import kotlinx.html.*
-import java.awt.Label
 
 
 fun Route.authenticationRoute() {
     get(C.Route.LOGIN) {
         call.respondHtml {
-            postackPageHeader("Postack Dashboard Login")
+            head("Postack Dashboard Login")
             body {
                 div(classes = "d-flex justify-content-center align-items-center vh-100") {
                     div(classes = "card text-bg-light mb-3") {
