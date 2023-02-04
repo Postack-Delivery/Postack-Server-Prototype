@@ -1,36 +1,55 @@
 package com.postack.routes
 
-import com.postack.domain.models.ProductVariant
+import com.postack.domain.controller.SupplierController
+import com.postack.domain.models.Supplier
+import com.postack.domain.models.SupplierLocation
 import com.postack.util.C
 import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import java.io.File
-import java.nio.file.Paths
 
-fun Route.supplierRoutes() {
+fun Route.supplierRoutes(supplierController: SupplierController) {
     route(C.Route.API.SUPPLIERS) {
         post {
             val multipartData = call.receiveMultipart()
-            val productVariantBuilder = ProductVariant.Builder()
-            multipartData.forEachPart { part ->
-                when (part) {
-                    is PartData.FormItem -> {
-                        println("form item: ${part.name}")
-                    }
-                    is PartData.FileItem -> {
-                        val fileName = (part.originalFileName as String).lowercase().trim()
-                        val fileBytes = part.streamProvider().readBytes()
-                        productVariantBuilder.image("/static/img/$fileName")
-                        File("${Paths.get("src/main/resources/static/img")}/$fileName")
-                            .writeBytes(fileBytes)
-                    }
+            val supplier = buildSupplierFromData(multipartData).build()
+            supplierController.addSupplier(supplier)
+            call.respondRedirect(C.Route.DASHBOARD)
+        }
 
-                    else -> {}
-                }
-                part.dispose()
-            }
+        post("/update") {
+            val multipartData = call.receiveMultipart()
+            val supplier = buildSupplierFromData(multipartData).build()
+            supplierController.addSupplier(supplier)
+            call.respondRedirect(C.Route.DASHBOARD)
         }
     }
+}
+
+suspend fun buildSupplierFromData(multiPartData: MultiPartData): Supplier.Builder {
+    val supplierBuilder = Supplier.Builder()
+    val supplierLocation = SupplierLocation.Builder()
+
+    multiPartData.forEachPart { part ->
+        when (part) {
+            is PartData.FormItem -> {
+                when (part.name) {
+                    C.SUPPLIER_NAME -> supplierBuilder.name(part.value)
+                    C.SUPPLIER_LOCATION.split(" ").first() -> {
+                        val location = part.value.split(",")
+                        supplierLocation.lat(location.first().toFloat())
+                        supplierLocation.long(location.last().toFloat())
+                    }
+
+                    C.SUPPLIER_CITY -> supplierLocation.city(part.value)
+                }
+            }
+
+            else -> {}
+        }
+        part.dispose()
+    }
+    return supplierBuilder.location(supplierLocation.build())
 }

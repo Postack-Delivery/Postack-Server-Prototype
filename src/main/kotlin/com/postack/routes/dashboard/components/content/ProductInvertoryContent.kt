@@ -1,10 +1,11 @@
 package com.postack.routes.dashboard.components.content
 
 import com.postack.domain.models.ProductResponse
-import com.postack.routes.dashboard.VariantData
+import com.postack.routes.dashboard.components.modals.tag
 import kotlinx.html.*
 
 fun DIV.productInventoryContent(products: ProductResponse) {
+    tag("Product Inventory Content".uppercase())
     div(classes = "tab-pane fade show active") {
         id = "product-inventory"
         role = "tabpanel"
@@ -118,13 +119,7 @@ fun DIV.productInventoryContent(products: ProductResponse) {
                                     role = "group"
                                     button(classes = "btn btn-link") {
                                         onClick =
-                                            "onSubmitVariants(\"${product.name}\", \"${
-                                                product.variants.map {
-                                                    VariantData(it.id, it.uniqueName)
-                                                }.toString()
-                                                    .trim()
-
-                                            }\")"
+                                            "onSubmitVariants(\"${product.name}\", \"${product.variants.map { it.toJsVariant() }}\")"
 
 
                                         p(classes = "text-md-left") {

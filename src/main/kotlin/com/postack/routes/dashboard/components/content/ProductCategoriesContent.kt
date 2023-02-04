@@ -1,9 +1,11 @@
 package com.postack.routes.dashboard.components.content
 
 import com.postack.domain.models.Category
+import com.postack.routes.dashboard.components.modals.tag
 import kotlinx.html.*
 
 fun DIV.productCategoriesContent(categories: List<Category>) {
+    tag("Product Categories Content".uppercase())
     div(classes = "tab-pane fade") {
         id = "product-categories"
         role = "tabpanel"

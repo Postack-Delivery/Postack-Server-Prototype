@@ -31,6 +31,9 @@ fun Application.configureTemplating() {
                 ul {
                     paddingLeft = 0.rem
                 }
+                "form-check" {
+                    paddingLeft = 0.em
+                }
                 ".width" {
                     width = 120.px
                     marginLeft = 9.px
@@ -39,7 +42,9 @@ fun Application.configureTemplating() {
                 ".topSpace" {
                     paddingTop = 20.px
                 }
-
+                ".top-space-sm" {
+                    paddingTop = 10.px
+                }
                 "button.text-gray" {
                     color = Color.gray
                 }

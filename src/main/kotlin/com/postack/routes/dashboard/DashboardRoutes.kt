@@ -2,13 +2,16 @@ package com.postack.routes.dashboard
 
 import com.postack.domain.controller.CategoryController
 import com.postack.domain.controller.ProductController
+import com.postack.domain.controller.SupplierController
 import com.postack.plugins.AdminSession
-import com.postack.routes.dashboard.components.modals.createCategoryModal
-import com.postack.routes.dashboard.components.modals.uploadProductModal
-import com.postack.routes.dashboard.components.postackPageHeader
-import com.postack.routes.components.sideBarNav
+import com.postack.routes.dashboard.components.modals.addCategoryModal
+import com.postack.routes.dashboard.components.modals.addProductModal
+import com.postack.routes.dashboard.components.head
 import com.postack.routes.dashboard.components.content.*
+import com.postack.routes.dashboard.components.modals.addProductVariantModal
+import com.postack.routes.dashboard.components.modals.supplierModal
 import com.postack.routes.dashboard.components.navigation.navBar
+import com.postack.routes.dashboard.components.navigation.sideBar
 import com.postack.util.C
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -18,65 +21,47 @@ import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import kotlinx.html.*
 
-fun Route.dashboardRoutes(productController: ProductController, categoryController: CategoryController) {
+fun Route.dashboardRoutes(
+    productController: ProductController,
+    categoryController: CategoryController,
+    supplierController: SupplierController
+) {
     route(C.Route.DASHBOARD) {
         get {
             val products = productController.getAllProducts(1)
             val categories = categoryController.getAllCategories()
+            val suppliers = supplierController.getAllSuppliers()
             val adminSession = call.principal<AdminSession>()
-            if (adminSession?.name?.isNotEmpty() == true) {
+
+            if (adminSession?.name?.lowercase()?.startsWith(C.ADMIN_USERNAME) == true) {
                 call.sessions.set(adminSession.copy(count = adminSession.count + 1))
                 call.respondHtml {
-                    postackPageHeader(title = "Postack Dashboard")
+                    head(title = "Postack Dashboard")
                     body {
                         navBar()
-                        div(classes = "row") {
-                            /**
-                             * @Navigation
-                             */
-                            sideBarNav()
-                            /**
-                             * @Navigation_Content
-                             */
-                            div(classes = "col-sm-8 gray") {
-
-                                div(classes = "tab-content") {
-                                    id = "v-pills-tabContent"
-                                    /**
-                                     * @Product_Inventory_Content
-                                     */
-                                    productInventoryContent(products = products)
-                                    /**
-                                     * @Product_Suppliers_Content
-                                     */
-                                    productSupplierContent()
-                                    /**
-                                     * @Product_Categories_Content
-                                     */
-                                    productCategoriesContent(categories = categories)
-                                    /**
-                                     * @Orders_Completed_Content
-                                     */
-                                    ordersCompletedContent()
-                                    /**
-                                     * @Orders_Ongoing_Content
-                                     */
-                                    ordersOngoingContent()
-                                    /**
-                                     * @Advertising_Create_Content
-                                     */
-                                    advertisingCreateContent()
-                                    /**
-                                     * @Advertising_Ongoing_Content
-                                     */
-                                    advertisingOngoingContent()
-                                }
+                        main {
+                            sideBar {
+                                productInventoryContent(products = products)
+                                productSupplierContent(suppliers = suppliers)
+                                productCategoriesContent(categories = categories)
+                                ordersCompletedContent()
+                                ordersOngoingContent()
+                                advertisingCreateContent()
+                                advertisingOngoingContent()
                             }
-                            /**
-                             * @Modals
-                             */
-                            createCategoryModal()
-                            uploadProductModal(categories = categories)
+                            addCategoryModal()
+                            addProductModal(categories = categories)
+                            supplierModal(
+                                title = "Create Supplier",
+                                id = "addSupplierModal",
+                                action = C.Route.API.SUPPLIERS
+                            )
+                            supplierModal(
+                                title = "Edit Supplier",
+                                id = "editSupplierModal",
+                                action = C.Route.API.UPDATE_SUPPLIER
+                            )
+                            addProductVariantModal()
                         }
                         unsafe {
                             +"""
@@ -96,11 +81,3 @@ fun Route.dashboardRoutes(productController: ProductController, categoryControll
     }
 }
 
-data class VariantData(
-    val id: String,
-    val name: String
-) {
-    override fun toString(): String {
-        return "{-id-: -$id-, -name-: -$name-}"
-    }
-}

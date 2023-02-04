@@ -1,10 +1,13 @@
+
 function onSubmitVariants() {
-    const result = JSON.parse(JSON.stringify(arguments[1].replaceAll('-', '"')));
+    const result = parseObjectString(arguments[1]);
     window.alert("Hello " + result);
     const arrayOfVariants = JSON.parse(result)
     console.log(arrayOfVariants[0].id);
 }
-
+function parseObjectString() {
+    return JSON.parse(JSON.stringify(arguments[0].replaceAll('-', '"')))
+}
 window.addEventListener('onCategoryChanged', (event) => {
     const selector = document.getElementById('SCSelector');
     while (selector.options.length > 0) {
@@ -79,4 +82,15 @@ triggerTabList.forEach(triggerEl => {
 })
 
 const triggerEl = document.querySelector('#v-pills-tab button[data-bs-target="#product-inventory"]')
-bootstrap.Tab.getInstance(triggerEl).show() //
+bootstrap.Tab.getInstance(triggerEl).show()
+
+
+function onSupplierEdit(supplier) {
+    console.log(`[TEST] - onUpdate ${supplier.name}`)
+    const name = document.getElementById('edit-supplier-name')
+    name.value = supplier.name
+    const location = document.getElementById('edit-supplier-location')
+    location.value = supplier.location
+    const city = document.getElementById('edit-supplier-city')
+    city.value = supplier.city
+}
