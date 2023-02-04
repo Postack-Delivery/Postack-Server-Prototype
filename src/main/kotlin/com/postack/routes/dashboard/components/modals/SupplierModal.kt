@@ -15,6 +15,17 @@ fun MAIN.supplierModal(
         action = action,
         identifier = id,
     ) {
+        if (title.split(" ").first().lowercase() == "edit") {
+            inputField(
+                classes = "row",
+                label = "ID",
+                named = "ID",
+                labelHeight = "sm-2",
+                inputHeight = "md-6",
+                identifier = "${title.split(" ").first().lowercase()}-supplier-id"
+            )
+        }
+
         inputField(
             label = C.SUPPLIER_NAME,
             named = C.SUPPLIER_NAME,

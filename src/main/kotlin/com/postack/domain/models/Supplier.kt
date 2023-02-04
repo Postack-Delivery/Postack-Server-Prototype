@@ -12,13 +12,16 @@ data class Supplier(
     val location: SupplierLocation
 ) {
     class Builder {
+        private var id: String = ""
         private var name: String = ""
         private var location: SupplierLocation? = null
+        fun id(id: String) = apply { this.id = id }
 
         fun name(name: String) = apply { this.name = name }
         fun location(location: SupplierLocation) = apply { this.location = location }
 
         fun build() = Supplier(
+            id = id,
             name = name,
             location = location!!
         )

@@ -81,9 +81,6 @@ triggerTabList.forEach(triggerEl => {
     })
 })
 
-const triggerEl = document.querySelector('#v-pills-tab button[data-bs-target="#product-inventory"]')
-bootstrap.Tab.getInstance(triggerEl).show()
-
 
 function onSupplierEdit(supplier) {
     console.log(`[TEST] - onUpdate ${supplier.name}`)
@@ -93,4 +90,11 @@ function onSupplierEdit(supplier) {
     location.value = supplier.location
     const city = document.getElementById('edit-supplier-city')
     city.value = supplier.city
+    const id = document.getElementById('edit-supplier-id')
+    id.value = supplier.id
+}
+
+function onDeleteItem(itemId) {
+    const id = document.getElementById('item-id')
+    id.value = itemId
 }

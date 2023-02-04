@@ -4,12 +4,9 @@ import com.postack.domain.controller.CategoryController
 import com.postack.domain.controller.ProductController
 import com.postack.domain.controller.SupplierController
 import com.postack.plugins.AdminSession
-import com.postack.routes.dashboard.components.modals.addCategoryModal
-import com.postack.routes.dashboard.components.modals.addProductModal
 import com.postack.routes.dashboard.components.head
 import com.postack.routes.dashboard.components.content.*
-import com.postack.routes.dashboard.components.modals.addProductVariantModal
-import com.postack.routes.dashboard.components.modals.supplierModal
+import com.postack.routes.dashboard.components.modals.*
 import com.postack.routes.dashboard.components.navigation.navBar
 import com.postack.routes.dashboard.components.navigation.sideBar
 import com.postack.util.C
@@ -62,6 +59,21 @@ fun Route.dashboardRoutes(
                                 action = C.Route.API.UPDATE_SUPPLIER
                             )
                             addProductVariantModal()
+                            deleteItemModal(
+                                title = "Delete Supplier",
+                                action = C.Route.API.DELETE_SUPPLIER,
+                                identifier = "deleteSupplierModal"
+                            )
+                            deleteItemModal(
+                                title = "Delete Product",
+                                action = C.Route.API.DELETE_PRODUCT,
+                                identifier = "deleteProductModal"
+                            )
+                            deleteItemModal(
+                                title = "Delete Category",
+                                action = C.Route.API.DELETE_PRODUCT,
+                                identifier = "deleteCategoryModal"
+                            )
                         }
                         unsafe {
                             +"""

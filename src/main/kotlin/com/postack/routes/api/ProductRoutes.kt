@@ -98,13 +98,21 @@ fun Route.productRoutes(productController: ProductController) {
             )
         }
 
-        delete("/{id}") {
-            val id = call.parameters["id"].toString()
-            call.respond(
-                HttpStatusCode.OK,
-                productController.deleteProduct(id)
-            )
+        post("/delete") {
+            val multiPartData = call.receiveMultipart()
+            multiPartData.forEachPart { part ->
+                when (part) {
+                    is PartData.FormItem -> {
+                        when (part.name) {
+                            "ID" -> call.respond(
+                                HttpStatusCode.OK,
+                                productController.deleteProduct(part.value)
+                            )
+                        }
+                    }
+                    else -> {}
+                }
+            }
         }
-
     }
 }
