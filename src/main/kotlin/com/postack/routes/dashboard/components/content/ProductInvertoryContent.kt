@@ -140,6 +140,9 @@ fun DIV.productInventoryContent(products: ProductResponse) {
                                     }
                                     button(classes = "btn btn-link") {
                                         p(classes = "text-md-left") {
+                                            attributes["data-bs-toggle"] = "modal"
+                                            attributes["data-bs-target"] = "#deleteProductModal"
+                                            onClick="onDeleteItem(${product.id})"
                                             span {
                                                 i(classes = "fa fa-trash") {}
                                                 +" Delete"

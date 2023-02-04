@@ -37,6 +37,9 @@ object C {
             const val V1 = "/api/v1"
             const val SUPPLIERS = "/api/v1/suppliers"
             const val UPDATE_SUPPLIER = "/api/v1/suppliers/update"
+            const val DELETE_SUPPLIER = "/api/v1/suppliers/update"
+            const val DELETE_PRODUCT = "/api/v1/products/update"
+            const val DELETE_CATEGORY = "/api/v1/category/update"
             const val PRODUCTS = "/api/v1/products"
             const val CATEGORIES = "/api/v1/categories"
         }

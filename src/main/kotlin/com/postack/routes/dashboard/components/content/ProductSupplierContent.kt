@@ -80,6 +80,9 @@ fun DIV.productSupplierContent(suppliers: List<Supplier>) {
 
                                     button(classes = "btn btn-link") {
                                         p(classes = "text-md-left") {
+                                            attributes["data-bs-toggle"] = "modal"
+                                            attributes["data-bs-target"] = "#deleteSupplierModal"
+                                            onClick="onDeleteItem(${supplier.id})"
                                             span {
                                                 i(classes = "fa fa-trash") {}
                                                 +" Delete"

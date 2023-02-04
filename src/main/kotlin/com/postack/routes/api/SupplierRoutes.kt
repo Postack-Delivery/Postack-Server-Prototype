@@ -9,6 +9,11 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.html.A
+import kotlin.reflect.jvm.internal.impl.util.CheckResult.IllegalFunctionName
 
 fun Route.supplierRoutes(supplierController: SupplierController) {
     route(C.Route.API.SUPPLIERS) {
@@ -22,7 +27,14 @@ fun Route.supplierRoutes(supplierController: SupplierController) {
         post("/update") {
             val multipartData = call.receiveMultipart()
             val supplier = buildSupplierFromData(multipartData).build()
-            supplierController.addSupplier(supplier)
+            supplierController.updateSupplier(supplier)
+            call.respondRedirect(C.Route.DASHBOARD)
+        }
+
+        post("/delete") {
+            val multipartData = call.receiveMultipart()
+            val supplier = buildSupplierFromData(multipartData).build()
+            supplierController.deleteSupplier(supplier)
             call.respondRedirect(C.Route.DASHBOARD)
         }
     }
@@ -36,6 +48,7 @@ suspend fun buildSupplierFromData(multiPartData: MultiPartData): Supplier.Builde
         when (part) {
             is PartData.FormItem -> {
                 when (part.name) {
+                    "ID" -> supplierBuilder.id(part.value)
                     C.SUPPLIER_NAME -> supplierBuilder.name(part.value)
                     C.SUPPLIER_LOCATION.split(" ").first() -> {
                         val location = part.value.split(",")

@@ -7,6 +7,7 @@ import com.postack.domain.models.Product
 import com.postack.domain.models.ProductVariant
 import com.postack.domain.models.SubCategory
 import com.postack.util.C
+import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -47,6 +48,22 @@ fun Route.categoryRoutes(categoryController: CategoryController) {
             val category = categoryBuilder.build()
             categoryController.addCategory(category)
             call.respondText("${category.name} is uploaded to  with the image '${category.cover}")
+        }
+        post("/delete") {
+            val multiPartData = call.receiveMultipart()
+            multiPartData.forEachPart { part ->
+                when (part) {
+                    is PartData.FormItem -> {
+                        when (part.name) {
+                            "ID" -> call.respond(
+                                HttpStatusCode.OK,
+                                categoryController.deleteCategory(part.value)
+                            )
+                        }
+                    }
+                    else -> {}
+                }
+            }
         }
     }
 }

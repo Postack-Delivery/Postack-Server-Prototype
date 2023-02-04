@@ -14,4 +14,12 @@ class SupplierControllerImpl(
     override suspend fun getAllSuppliers(): List<Supplier> {
         return supplierDataSource.getAllSuppliers()
     }
+
+    override suspend fun updateSupplier(supplier: Supplier) {
+        supplierDataSource.updateSupplier(supplier)
+    }
+
+    override suspend fun deleteSupplier(supplier: Supplier) {
+        supplierDataSource.deleteSupplier(supplier)
+    }
 }

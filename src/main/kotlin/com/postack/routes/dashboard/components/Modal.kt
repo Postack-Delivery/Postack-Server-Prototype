@@ -7,6 +7,7 @@ fun MAIN.modal(
     title: String,
     action: String,
     identifier: String,
+    submitLabel: String = "Submit",
     method: FormMethod = FormMethod.post,
     formEncType: FormEncType = FormEncType.multipartFormData,
     content: DIV.() -> Unit
@@ -24,6 +25,7 @@ fun MAIN.modal(
                 method = method,
                 classes = "row g-3 topSpace"
             ) {
+                onSubmit="this.querySelectorAll('input').forEach(i => i.disabled = false)"
                 div(classes = "modal-content") {
                     div(classes = "modal-header") {
                         h1(classes = "modal-title fs-5") { +title }
@@ -32,8 +34,8 @@ fun MAIN.modal(
                         content()
                     }
                     div(classes = "modal-footer") {
-                        submitInput(classes = "btn btn-dark") {
-                            value = "Submit"
+                        submitInput(classes = "btn ${if (submitLabel == "Delete") "btn btn-danger" else "btn-dark"}") {
+                            value = submitLabel
                         }
                     }
                 }

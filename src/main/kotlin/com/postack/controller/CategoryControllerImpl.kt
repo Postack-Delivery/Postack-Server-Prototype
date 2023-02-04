@@ -14,4 +14,8 @@ class CategoryControllerImpl(
     override suspend fun getAllCategories(): List<Category> {
         return categoryDataSource.getAllCategories()
     }
+
+    override suspend fun deleteCategory(id: String) {
+        categoryDataSource.deleteCategory(id)
+    }
 }

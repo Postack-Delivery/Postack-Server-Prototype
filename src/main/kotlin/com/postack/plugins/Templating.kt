@@ -42,6 +42,10 @@ fun Application.configureTemplating() {
                 ".topSpace" {
                     paddingTop = 20.px
                 }
+                    ".disable" {
+                        pointerEvents = PointerEvents.none
+                        backgroundColor = Color.gray
+                    }
                 ".top-space-sm" {
                     paddingTop = 10.px
                 }

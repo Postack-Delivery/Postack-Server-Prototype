@@ -5,6 +5,7 @@ import com.postack.domain.models.Category
 import com.postack.domain.models.Product
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import org.litote.kmongo.coroutine.insertOne
+import org.litote.kmongo.eq
 
 class CategoryDataSourceImpl(
     db: CoroutineDatabase
@@ -17,5 +18,9 @@ class CategoryDataSourceImpl(
 
     override suspend fun getAllCategories(): List<Category> {
         return categoryCollection.find().toList()
+    }
+
+    override suspend fun deleteCategory(id: String) {
+        categoryCollection.deleteOne(Category::id eq id)
     }
 }
