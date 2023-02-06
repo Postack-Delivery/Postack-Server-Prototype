@@ -35,13 +35,18 @@ object C {
         const val STATIC = "/static"
         object API {
             const val V1 = "/api/v1"
+            const val PRODUCTS = "/api/v1/products"
+            const val DELETE_PRODUCT = "/api/v1/products/delete"
+            const val UPDATE_PRODUCT = "/api/v1/products/update"
             const val SUPPLIERS = "/api/v1/suppliers"
             const val UPDATE_SUPPLIER = "/api/v1/suppliers/update"
-            const val DELETE_SUPPLIER = "/api/v1/suppliers/update"
-            const val DELETE_PRODUCT = "/api/v1/products/update"
-            const val DELETE_CATEGORY = "/api/v1/category/update"
-            const val PRODUCTS = "/api/v1/products"
+            const val DELETE_SUPPLIER = "/api/v1/suppliers/delete"
             const val CATEGORIES = "/api/v1/categories"
+            const val ADD_SUB_CATEGORY = "/api/v1/categories/add"
+            const val UPDATE_CATEGORY = "/api/v1/categories/update"
+            const val DELETE_CATEGORY = "/api/v1/category/delete"
+
+
         }
     }
 }

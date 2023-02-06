@@ -72,18 +72,20 @@ fun DIV.productCategoriesContent(categories: List<Category>) {
                                 div(classes = "btn-group-vertical") {
                                     role = "group"
                                     button(classes = "btn btn-link") {
-                                        onClick = ""
-
-
+                                        attributes["data-bs-toggle"] = "modal"
+                                        attributes["data-bs-target"] = "#editCategory"
+                                        onClick = "onEditCategory"
                                         p(classes = "text-md-left") {
                                             span {
                                                 i(classes = "fa fa-edit") {}
                                                 +" Edit"
                                             }
-
                                         }
                                     }
                                     button(classes = "btn btn-link") {
+                                        attributes["data-bs-toggle"] = "modal"
+                                        attributes["data-bs-target"] = "#addSubCategoryModal"
+                                        onClick="onAddSubCategory('${category.id}')"
                                         p(classes = "text-md-left") {
                                             span {
                                                 i(classes = "fa fa-plus-circle") {}
@@ -94,7 +96,7 @@ fun DIV.productCategoriesContent(categories: List<Category>) {
                                     button(classes = "btn btn-link") {
                                         attributes["data-bs-toggle"] = "modal"
                                         attributes["data-bs-target"] = "#deleteCategoryModal"
-                                        onClick="onDeleteItem(${category.id})"
+                                        onClick="onDeleteItem('${category.id}')"
                                         p(classes = "text-md-left") {
                                             span {
                                                 i(classes = "fa fa-trash") {}

@@ -1,10 +1,7 @@
 package com.postack.routes
 
 import com.postack.domain.controller.CategoryController
-import com.postack.domain.controller.ProductController
 import com.postack.domain.models.Category
-import com.postack.domain.models.Product
-import com.postack.domain.models.ProductVariant
 import com.postack.domain.models.SubCategory
 import com.postack.util.C
 import io.ktor.http.*
@@ -33,6 +30,7 @@ fun Route.categoryRoutes(categoryController: CategoryController) {
                             )
                         }
                     }
+
                     is PartData.FileItem -> {
                         val fileName = (part.originalFileName as String).lowercase().trim()
                         val fileBytes = part.streamProvider().readBytes()
@@ -49,6 +47,28 @@ fun Route.categoryRoutes(categoryController: CategoryController) {
             categoryController.addCategory(category)
             call.respondText("${category.name} is uploaded to  with the image '${category.cover}")
         }
+        post("/add") {
+            val multiPartData = call.receiveMultipart()
+            var categoryId = ""
+            multiPartData.forEachPart { part ->
+                when (part) {
+                    is PartData.FormItem -> {
+                        when (part.name) {
+                            "ID" -> categoryId = part.value
+                            C.CATEGORY_NAME -> call.respond(
+                                HttpStatusCode.OK,
+                                categoryController.addSubCategory(
+                                    categoryId = categoryId,
+                                    name = part.value
+                                )
+                            )
+                        }
+                    }
+
+                    else -> {}
+                }
+            }
+        }
         post("/delete") {
             val multiPartData = call.receiveMultipart()
             multiPartData.forEachPart { part ->
@@ -61,6 +81,7 @@ fun Route.categoryRoutes(categoryController: CategoryController) {
                             )
                         }
                     }
+
                     else -> {}
                 }
             }

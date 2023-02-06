@@ -4,6 +4,7 @@ import com.postack.domain.models.Category
 
 interface CategoryController {
     suspend fun addCategory(category: Category)
+    suspend fun addSubCategory(categoryId: String, name: String)
     suspend fun getAllCategories(): List<Category>
     suspend fun deleteCategory(id: String)
 

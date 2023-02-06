@@ -20,7 +20,10 @@ data class Supplier(
         fun name(name: String) = apply { this.name = name }
         fun location(location: SupplierLocation) = apply { this.location = location }
 
-        fun build() = Supplier(
+        fun build() = if (id.isEmpty()) Supplier(
+            name = name,
+            location = location!!
+        ) else Supplier(
             id = id,
             name = name,
             location = location!!

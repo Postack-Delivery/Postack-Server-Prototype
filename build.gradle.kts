@@ -8,6 +8,7 @@ plugins {
     kotlin("jvm") version "1.7.22"
     id("io.ktor.plugin") version "2.2.1"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.22"
+    id("com.google.devtools.ksp") version "1.7.20-1.0.6"
 }
 
 group = "com.postack"
@@ -54,5 +55,7 @@ dependencies {
     implementation("io.insert-koin:koin-core:$koin_version")
     implementation("io.insert-koin:koin-ktor:$koin_version")
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
+
+    implementation("dev.fritz2:core:1.0-RC2")
 
 }

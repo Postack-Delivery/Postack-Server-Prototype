@@ -142,7 +142,7 @@ fun DIV.productInventoryContent(products: ProductResponse) {
                                         p(classes = "text-md-left") {
                                             attributes["data-bs-toggle"] = "modal"
                                             attributes["data-bs-target"] = "#deleteProductModal"
-                                            onClick="onDeleteItem(${product.id})"
+                                            onClick="onDeleteItem('${product.id}')"
                                             span {
                                                 i(classes = "fa fa-trash") {}
                                                 +" Delete"

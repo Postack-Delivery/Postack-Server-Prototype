@@ -13,22 +13,22 @@ fun MAIN.addCategoryModal() {
     ) {
         inputField(
             label = "Name",
-            labelHeight = "sm-4",
-            inputHeight = "sm-10",
+            labelWidth = "sm-4",
+            inputWidth = "sm-10",
             named = C.CATEGORY_NAME
         )
 
         inputField(
             label = "Sub-category",
             annotation = "(use commas i.e Breakfast, Treats)",
-            inputHeight = "sm-10",
+            inputWidth = "sm-10",
             named = C.CATEGORY_SUBCATEGORY
         )
 
         inputField(
             label = "Cover",
-            labelHeight = "sm-4",
-            inputHeight = "sm-10",
+            labelWidth = "sm-4",
+            inputWidth = "sm-10",
             inputType = InputType.file,
             named = C.CATEGORY_COVER
         )

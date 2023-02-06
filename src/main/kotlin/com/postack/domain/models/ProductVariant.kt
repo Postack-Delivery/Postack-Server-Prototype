@@ -51,7 +51,7 @@ data class ProductVariant(
         val name: String
     ) {
         override fun toString(): String {
-            return "{-id-: -$id-, -name-: -$name-}"
+            return "{'id': '$id', 'name': '$name'}"
         }
     }
     fun toJsVariant() = JsVariant(

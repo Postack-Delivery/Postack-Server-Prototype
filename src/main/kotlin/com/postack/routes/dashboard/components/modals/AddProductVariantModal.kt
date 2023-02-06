@@ -29,7 +29,7 @@ fun MAIN.addProductVariantModal() {
         div(classes = "mb-3") {
             inputField(
                 label = "Image",
-                inputHeight = "sm-10",
+                inputWidth = "sm-10",
                 inputType = InputType.file,
                 named = C.CATEGORY_COVER
             )
