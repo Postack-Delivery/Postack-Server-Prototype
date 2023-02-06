@@ -15,15 +15,15 @@ fun MAIN.addProductModal(categories: List<Category>) {
         inputField(
             classes = "row",
             label = "Name",
-            labelHeight = "sm-2",
-            inputHeight = "sm-10",
+            labelWidth = "sm-2",
+            inputWidth = "sm-10",
             named = C.PRODUCT_NAME
         )
         inputField(
             classes = "row",
             label = "Variant",
-            labelHeight = "sm-2",
-            inputHeight = "sm-10",
+            labelWidth = "sm-2",
+            inputWidth = "sm-10",
             named = C.PRODUCT_VARIANT
         )
 
@@ -33,8 +33,8 @@ fun MAIN.addProductModal(categories: List<Category>) {
                     inputField(
                         classes = "row",
                         label = "Price",
-                        labelHeight = "sm-4",
-                        inputHeight = "sm-6",
+                        labelWidth = "sm-4",
+                        inputWidth = "sm-6",
                         named = C.PRODUCT_PRICE,
                         inputType = InputType.number
                     )
@@ -42,8 +42,8 @@ fun MAIN.addProductModal(categories: List<Category>) {
                     inputField(
                         classes = "row",
                         label = "Weight",
-                        labelHeight = "sm-4",
-                        inputHeight = "sm-6",
+                        labelWidth = "sm-4",
+                        inputWidth = "sm-6",
                         named = C.PRODUCT_WEIGHT,
                         inputType = InputType.number
                     )
@@ -51,24 +51,24 @@ fun MAIN.addProductModal(categories: List<Category>) {
                     inputField(
                         classes = "row",
                         label = "Quantity",
-                        labelHeight = "sm-4",
-                        inputHeight = "sm-6",
+                        labelWidth = "sm-4",
+                        inputWidth = "sm-6",
                         named = C.PRODUCT_QUANTITY,
                         inputType = InputType.number
                     )
                     inputField(
                         classes = "row",
                         label = "Unit-measure",
-                        labelHeight = "sm-4",
-                        inputHeight = "sm-6",
+                        labelWidth = "sm-4",
+                        inputWidth = "sm-6",
                         named = C.PRODUCT_UNIT_MEASURE,
                     )
 
                     inputField(
                         classes = "row",
                         label = "Description",
-                        labelHeight = "sm-4",
-                        inputHeight = "sm-10",
+                        labelWidth = "sm-4",
+                        inputWidth = "sm-10",
                         named = C.PRODUCT_DESCRIPTION,
                         isTextArea = true
                     )

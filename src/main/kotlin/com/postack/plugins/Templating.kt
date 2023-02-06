@@ -81,6 +81,10 @@ fun Application.configureTemplating() {
                     width = 173.px
                     height = 173.px
                 }
+                ".icon-btn" {
+                    minWidth = 39.px
+                    maxHeight = 39.px
+                }
                 ".active" {
                     fontWeight = FontWeight.bold
                     color = Color.black

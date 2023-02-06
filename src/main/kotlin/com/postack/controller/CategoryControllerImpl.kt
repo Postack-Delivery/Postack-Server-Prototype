@@ -18,4 +18,8 @@ class CategoryControllerImpl(
     override suspend fun deleteCategory(id: String) {
         categoryDataSource.deleteCategory(id)
     }
+
+    override suspend fun addSubCategory(categoryId: String, name: String) {
+        categoryDataSource.insertSubCategory(categoryId = categoryId, name = name)
+    }
 }

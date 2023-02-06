@@ -11,6 +11,6 @@ data class SubCategory(
     val name: String,
 ) {
     fun toString(category: String): String {
-        return "{-id-: -$id-, -name-: -$name-, -category-: -${category.split(" ").first().lowercase()}-}"
+        return "{'id': '$id', 'name': '$name', 'category': '${category.split(" ").first().lowercase()}'}"
     }
 }

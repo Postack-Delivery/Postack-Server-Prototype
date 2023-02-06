@@ -20,8 +20,8 @@ fun MAIN.supplierModal(
                 classes = "row",
                 label = "ID",
                 named = "ID",
-                labelHeight = "sm-2",
-                inputHeight = "md-6",
+                labelWidth = "sm-2",
+                inputWidth = "md-6",
                 identifier = "${title.split(" ").first().lowercase()}-supplier-id"
             )
         }
@@ -35,7 +35,7 @@ fun MAIN.supplierModal(
         inputField(
             label = C.SUPPLIER_LOCATION,
             annotation = "(comma separated i.e 32º,-12º):",
-            inputHeight = "sm-10",
+            inputWidth = "sm-10",
             named = C.SUPPLIER_LOCATION.split(" ").first(),
             identifier = "${title.split(" ").first().lowercase()}-supplier-location"
         )

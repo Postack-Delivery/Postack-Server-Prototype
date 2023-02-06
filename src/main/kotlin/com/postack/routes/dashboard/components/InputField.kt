@@ -3,26 +3,26 @@ package com.postack.routes.dashboard.components
 import kotlinx.html.*
 
 fun DIV.inputField(
-    classes: String = "",
-    identifier: String = "",
     named: String,
-    label: String,
-    inputType: InputType = InputType.text,
-    labelHeight: String = "",
-    inputHeight: String = "",
+    label: String = "",
+    classes: String = "",
+    labelWidth: String = "",
+    inputWidth: String = "",
     annotation: String = "",
-    isTextArea: Boolean = false
+    identifier: String = "",
+    isTextArea: Boolean = false,
+    inputType: InputType = InputType.text
 ) {
     div(classes = "mb-3 $classes") {
-        if (label != "ID") {
-            label(classes = "col${"-$labelHeight"} col-form-label") {
+        if (label != "ID" && label.isNotEmpty()) {
+            label(classes = "col${"-$labelWidth"} col-form-label") {
                 +"$label${if (annotation.isEmpty()) ":" else ""}"
                 if (annotation.isNotEmpty()) {
                     small("text-muted") { +annotation }
                 }
             }
         }
-        div(classes = "col${"-$inputHeight"}") {
+        div(classes = "col${"-$inputWidth"}") {
             if (isTextArea) {
                 textArea(classes = "form-control") {
                     id = identifier

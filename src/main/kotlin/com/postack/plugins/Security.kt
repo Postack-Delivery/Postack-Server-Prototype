@@ -12,7 +12,7 @@ fun Application.configureSecurity() {
     install(Sessions) {
         cookie<AdminSession>(C.ADMIN_USERNAME) {
             cookie.path = "/"
-            cookie.maxAgeInSeconds = 60 * 30
+            cookie.maxAgeInSeconds = 60 * 60 * 2
         }
     }
 

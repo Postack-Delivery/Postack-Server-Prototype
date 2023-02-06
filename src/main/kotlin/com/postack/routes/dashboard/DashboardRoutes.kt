@@ -47,6 +47,12 @@ fun Route.dashboardRoutes(
                                 advertisingOngoingContent()
                             }
                             addCategoryModal()
+                            editCategoryModal()
+                            addSubCategoryModal(
+                                title = "Add Sub-category",
+                                identifier = "addSubCategoryModal",
+                                action = C.Route.API.ADD_SUB_CATEGORY
+                            )
                             addProductModal(categories = categories)
                             supplierModal(
                                 title = "Create Supplier",
@@ -59,17 +65,17 @@ fun Route.dashboardRoutes(
                                 action = C.Route.API.UPDATE_SUPPLIER
                             )
                             addProductVariantModal()
-                            deleteItemModal(
+                            deleteWarningModal(
                                 title = "Delete Supplier",
                                 action = C.Route.API.DELETE_SUPPLIER,
                                 identifier = "deleteSupplierModal"
                             )
-                            deleteItemModal(
+                            deleteWarningModal(
                                 title = "Delete Product",
                                 action = C.Route.API.DELETE_PRODUCT,
                                 identifier = "deleteProductModal"
                             )
-                            deleteItemModal(
+                            deleteWarningModal(
                                 title = "Delete Category",
                                 action = C.Route.API.DELETE_PRODUCT,
                                 identifier = "deleteCategoryModal"

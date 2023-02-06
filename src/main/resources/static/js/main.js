@@ -73,28 +73,35 @@ window.addEventListener('onCategoryChanged', (event) => {
 
 const triggerTabList = document.querySelectorAll('#v-pills-tab button')
 triggerTabList.forEach(triggerEl => {
-    const tabTrigger = new bootstrap.Tab(triggerEl)
+    const tabTrigger = new bootstrap.Tab(triggerEl);
 
     triggerEl.addEventListener('click', event => {
-        event.preventDefault()
-        tabTrigger.show()
-    })
+        event.preventDefault();
+        tabTrigger.show();
+    });
 })
 
 
 function onSupplierEdit(supplier) {
-    console.log(`[TEST] - onUpdate ${supplier.name}`)
-    const name = document.getElementById('edit-supplier-name')
-    name.value = supplier.name
-    const location = document.getElementById('edit-supplier-location')
-    location.value = supplier.location
-    const city = document.getElementById('edit-supplier-city')
-    city.value = supplier.city
-    const id = document.getElementById('edit-supplier-id')
-    id.value = supplier.id
+    console.log(`[TEST] - onUpdate ${supplier.name}`);
+    const name = document.getElementById('edit-supplier-name');
+    name.value = supplier.name;
+    const location = document.getElementById('edit-supplier-location');
+    location.value = supplier.location;
+    const city = document.getElementById('edit-supplier-city');
+    city.value = supplier.city;
+    const id = document.getElementById('edit-supplier-id');
+    id.value = supplier.id;
 }
 
 function onDeleteItem(itemId) {
-    const id = document.getElementById('item-id')
-    id.value = itemId
+    console.log(`[onDeleteItem] - ${itemId}`);
+    const id = document.getElementById('item-id');
+    id.value = itemId;
+}
+
+function onAddSubCategory(categoryId) {
+    console.log(`[onAddSubCategory] - ${categoryId}`);
+    // const id = document.getElementById('category-id');
+    // id.value = categoryId;
 }
