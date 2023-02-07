@@ -77,8 +77,13 @@ fun Route.dashboardRoutes(
                             )
                             deleteWarningModal(
                                 title = "Delete Category",
-                                action = C.Route.API.DELETE_PRODUCT,
+                                action = C.Route.API.DELETE_CATEGORY,
                                 identifier = "deleteCategoryModal"
+                            )
+                            deleteWarningModal(
+                                title = "Delete Subcategory",
+                                action = C.Route.API.DELETE_SUB_CATEGORY,
+                                identifier = "deleteSubcategoryModal"
                             )
                         }
                         unsafe {
@@ -89,7 +94,10 @@ fun Route.dashboardRoutes(
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>                      
                         """.trimIndent()
                         }
-                        script(type = ScriptType.textJavaScript, src = "/static/js/main.js") { }
+                        script(type = ScriptType.textJavaScript, src = "/static/js/main.js") {
+                            defer = true
+                        }
+
                     }
                 }
             } else {

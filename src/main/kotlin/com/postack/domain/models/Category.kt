@@ -13,15 +13,22 @@ data class Category(
     val cover: String
 ) {
     class Builder {
+        private var id: String = ""
         private var name: String = ""
         private var cover: String = ""
         private var subCategory: List<SubCategory> = emptyList()
+        fun id(id: String) = apply { this.id = id }
 
         fun name(name: String) = apply { this.name = name }
         fun cover(cover: String) = apply { this.cover = cover }
         fun subCategory(subCategory: List<SubCategory>) = apply { this.subCategory = subCategory }
 
-        fun build() = Category(
+        fun build() = if (id.isEmpty()) Category(
+            name = name,
+            subCategory = subCategory,
+            cover = cover
+        ) else Category(
+            id = id,
             name = name,
             subCategory = subCategory,
             cover = cover

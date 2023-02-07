@@ -11,6 +11,15 @@ fun MAIN.deleteWarningModal(title: String, action: String, identifier: String) {
         inputField(
             classes = "row",
             label = "ID",
+            named = "CategoryId",
+            labelWidth = "sm-2",
+            inputWidth = "md-6",
+            identifier = "parent-id"
+        )
+
+        inputField(
+            classes = "row",
+            label = "ID",
             named = "ID",
             labelWidth = "sm-2",
             inputWidth = "md-6",

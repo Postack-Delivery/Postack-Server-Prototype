@@ -42,7 +42,8 @@ object C {
             const val UPDATE_SUPPLIER = "/api/v1/suppliers/update"
             const val DELETE_SUPPLIER = "/api/v1/suppliers/delete"
             const val CATEGORIES = "/api/v1/categories"
-            const val ADD_SUB_CATEGORY = "/api/v1/categories/add"
+            const val ADD_SUB_CATEGORY = "/api/v1/categories/add-subcategory"
+            const val DELETE_SUB_CATEGORY = "/api/v1/categories/delete-subcategory"
             const val UPDATE_CATEGORY = "/api/v1/categories/update"
             const val DELETE_CATEGORY = "/api/v1/category/delete"
 

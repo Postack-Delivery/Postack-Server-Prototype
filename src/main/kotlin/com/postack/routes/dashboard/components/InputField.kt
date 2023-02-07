@@ -31,10 +31,12 @@ fun DIV.inputField(
             } else {
                 input(classes = "form-control ${if (label == "ID") "disabled" else ""}") {
                     id = identifier
-                    type = inputType
+                    type = if (label == "ID") InputType.hidden else inputType
                     name = named
                     if (label == "ID") {
                         readonly = true
+                    }
+                    if (identifier.startsWith( "edit-subcategory")) {
                         hidden = true
                     }
                 }

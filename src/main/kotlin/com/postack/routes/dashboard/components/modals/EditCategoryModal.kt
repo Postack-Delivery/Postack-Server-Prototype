@@ -10,32 +10,35 @@ import kotlinx.html.*
 fun MAIN.editCategoryModal() {
     modal(
         title = "Edit Category",
-        action = "",
+        action = C.Route.API.UPDATE_CATEGORY,
         identifier = "editCategory"
     ) {
         inputField(
             classes = "row",
             label = "ID",
-            named = "ID",
+            named = "CategoryID",
             labelWidth = "sm-2",
             inputWidth = "md-6",
-            identifier = "category-id"
+            identifier = "edit-category-id"
         )
         inputField(
+            identifier = "edit-category-name",
             named = C.CATEGORY_NAME
         )
         h6(classes = "text-muted") { +"Sub categories" }
         for (i in 1..10) {
-            flexRow(alignment = "justify-content-between", identifier = "subcategory$i") {
+            flexRow(alignment = "justify-content-between", identifier = "subcategory") {
                 inputField(
-                    identifier = "subcategory-name$i",
-                    named = "subcategory-name$i"
+                    identifier = "edit-subcategory-name$i",
+                    named = "edit-subcategory-name$i"
                 )
 
                 button(classes = "btn btn-danger icon-btn") {
+                    id = "delete-subcategory-name$i"
+                    onClick= "onDeleteCategory($i)"
                     attributes["type"] = "button"
                     attributes["data-bs-toggle"] = "modal"
-                    attributes["data-bs-target"] = "#deleteCategoryModal"
+                    attributes["data-bs-target"] = "#deleteSubcategoryModal"
                     i(classes = "fa fa-trash") {}
                 }
 
