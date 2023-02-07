@@ -74,7 +74,11 @@ fun DIV.productCategoriesContent(categories: List<Category>) {
                                     button(classes = "btn btn-link") {
                                         attributes["data-bs-toggle"] = "modal"
                                         attributes["data-bs-target"] = "#editCategory"
-                                        onClick = "onEditCategory"
+                                        onClick = "onEditCategory({" +
+                                                "id: '${category.id}', " +
+                                                "label: '${category.name}', " +
+                                                "data: [${category}]" +
+                                            "})"
                                         p(classes = "text-md-left") {
                                             span {
                                                 i(classes = "fa fa-edit") {}

@@ -102,6 +102,57 @@ function onDeleteItem(itemId) {
 
 function onAddSubCategory(categoryId) {
     console.log(`[onAddSubCategory] - ${categoryId}`);
-    // const id = document.getElementById('category-id');
-    // id.value = categoryId;
+     const id = document.getElementById('category-id');
+     id.value = categoryId;
+}
+
+function onEditCategory(category) {
+    console.log(category.data);
+    window.localStorage.setItem("categories", JSON.stringify(category))
+}
+
+const editCategoryModal = document.getElementById('editCategory')
+editCategoryModal.addEventListener('shown.bs.modal', event => {
+    const category = JSON.parse(window.localStorage.getItem("categories"))
+    const categoryId = document.getElementById(`edit-category-id`);
+    document.getElementById('item-id').value = category.id;
+    categoryId.value = category.id
+    const categoryName = document.getElementById(`edit-category-name`);
+    categoryName.value = category.label
+
+    console.log(category.data);
+    for(var i = 0; i < category.data.length; i++) {
+        console.log(category.data[i].name);
+        const editName = document.getElementById(`edit-subcategory-name${i + 1}`);
+        editName.disabled = false;
+        editName.hidden = false;
+        editName.value = category.data[i].name;
+        editName.name = `subcategory-name${i + 1}`
+        if (i > 0) {
+            const deleteBtn = document.getElementById(`delete-subcategory-name${i + 1}`);
+            deleteBtn.hidden = false;
+            deleteBtn.disabled = false;
+        }
+
+    }
+    for (var i = category.data.length; i < 10; i++) {
+        const editName = document.getElementById(`edit-subcategory-name${i + 1}`);
+        const deleteBtn = document.getElementById(`delete-subcategory-name${i + 1}`);
+        editName.disabled = true;
+        editName.hidden = true;
+        deleteBtn.hidden = true;
+        deleteBtn.disabled = true;
+
+    }
+
+})
+
+
+function onDeleteCategory(index) {
+    const category = JSON.parse(window.localStorage.getItem("categories"))
+    console.log(`[onDeleteItem] - ${category.data[index - 1].name}`);
+    const id = document.getElementById('item-id');
+    id.value = category.data[index - 1].id;
+    const categoryId = document.getElementById('parent-id');
+    categoryId.value = category.id
 }

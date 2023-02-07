@@ -47,7 +47,95 @@ fun Route.categoryRoutes(categoryController: CategoryController) {
             categoryController.addCategory(category)
             call.respondText("${category.name} is uploaded to  with the image '${category.cover}")
         }
-        post("/add") {
+        post("/delete") {
+            val multiPartData = call.receiveMultipart()
+            multiPartData.forEachPart { part ->
+                when (part) {
+                    is PartData.FormItem -> {
+                        when (part.name) {
+                            "ID" -> call.respond(
+                                HttpStatusCode.OK,
+                                categoryController.deleteCategory(part.value)
+                            )
+                        }
+                    }
+
+                    else -> {}
+                }
+            }
+        }
+        post("/update") {
+            val multiPartData = call.receiveMultipart()
+            val categoryBuilder = Category.Builder()
+            val subCategory = mutableListOf<SubCategory>()
+            multiPartData.forEachPart { part ->
+                when (part) {
+                    is PartData.FormItem -> {
+                        when (part.name) {
+                            "ID" -> categoryBuilder.id(part.value)
+                            "name" -> {
+                                categoryBuilder.name(part.value)
+                            }
+
+                            "subcategory-name1" -> {
+                                if (part.value.isNotEmpty()) {
+                                    subCategory.add(SubCategory(name = part.value))
+                                }
+                            }
+
+                            "subcategory-name2" -> {
+                                if (part.value.isNotEmpty()) {
+                                    subCategory.add(SubCategory(name = part.value))
+                                }                            }
+
+                            "subcategory-name3" -> {
+                                if (part.value.isNotEmpty()) {
+                                    subCategory.add(SubCategory(name = part.value))
+                                }                            }
+
+                            "subcategory-name4" -> {
+                                if (part.value.isNotEmpty()) {
+                                    subCategory.add(SubCategory(name = part.value))
+                                }                            }
+
+                            "subcategory-name5" -> {
+                                if (part.value.isNotEmpty()) {
+                                    subCategory.add(SubCategory(name = part.value))
+                                }                            }
+
+                            "subcategory-name6" -> {
+                                if (part.value.isNotEmpty()) {
+                                    subCategory.add(SubCategory(name = part.value))
+                                }                            }
+
+                            "subcategory-name7" -> {
+                                if (part.value.isNotEmpty()) {
+                                    subCategory.add(SubCategory(name = part.value))
+                                }                            }
+
+                            "subcategory-name8" -> {
+                                if (part.value.isNotEmpty()) {
+                                    subCategory.add(SubCategory(name = part.value))
+                                }                            }
+
+                            "subcategory-name9" -> {
+                                if (part.value.isNotEmpty()) {
+                                    subCategory.add(SubCategory(name = part.value))
+                                }
+                            }
+                        }
+                    }
+
+                    else -> {}
+                }
+            }
+            val category = categoryBuilder.subCategory(subCategory).build()
+            categoryController.updateCategory(category)
+            call.respondText(
+                "Updated ${category.id}"
+            )
+        }
+        post("/add-subcategory") {
             val multiPartData = call.receiveMultipart()
             var categoryId = ""
             multiPartData.forEachPart { part ->
@@ -69,15 +157,21 @@ fun Route.categoryRoutes(categoryController: CategoryController) {
                 }
             }
         }
-        post("/delete") {
+
+        post("/delete-subcategory") {
             val multiPartData = call.receiveMultipart()
+            var categoryId = ""
+            var subCategoryId = ""
+
             multiPartData.forEachPart { part ->
                 when (part) {
                     is PartData.FormItem -> {
                         when (part.name) {
-                            "ID" -> call.respond(
+                            "CategoryId" -> categoryId = part.value
+                            "ID" -> subCategoryId = part.value
+                            C.CATEGORY_NAME -> call.respond(
                                 HttpStatusCode.OK,
-                                categoryController.deleteCategory(part.value)
+                                categoryController.deleteSubcategory(categoryId = categoryId, id = subCategoryId)
                             )
                         }
                     }

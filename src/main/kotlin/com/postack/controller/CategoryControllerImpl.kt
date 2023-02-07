@@ -15,11 +15,19 @@ class CategoryControllerImpl(
         return categoryDataSource.getAllCategories()
     }
 
+    override suspend fun updateCategory(category: Category) {
+        categoryDataSource.updateCategory(category = category)
+    }
+
     override suspend fun deleteCategory(id: String) {
         categoryDataSource.deleteCategory(id)
     }
 
     override suspend fun addSubCategory(categoryId: String, name: String) {
         categoryDataSource.insertSubCategory(categoryId = categoryId, name = name)
+    }
+
+    override suspend fun deleteSubcategory(categoryId: String, id: String) {
+        categoryDataSource.deleteSubcategory(categoryId = categoryId, id = id)
     }
 }
