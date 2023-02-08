@@ -105,7 +105,10 @@ fun MAIN.addProductModal(categories: List<Category>) {
                 id = "CSelector"
                 name = C.PRODUCT_CATEGORY
                 onChange =
-                    "window.dispatchEvent(new CustomEvent(\"onCategoryChanged\",{ detail: { category: document.getElementById(\"CSelector\").value, data: \"$categories\"} }));"
+                    "window.dispatchEvent(new CustomEvent(" +
+                            "\"onCategoryChanged\"," +
+                            "{ detail: { category: document.getElementById(\"CSelector\").value, data: $categories} }" +
+                    "));"
 
                 option {
                     hidden = true

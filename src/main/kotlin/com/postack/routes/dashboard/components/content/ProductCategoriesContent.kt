@@ -100,7 +100,7 @@ fun DIV.productCategoriesContent(categories: List<Category>) {
                                     button(classes = "btn btn-link") {
                                         attributes["data-bs-toggle"] = "modal"
                                         attributes["data-bs-target"] = "#deleteCategoryModal"
-                                        onClick="onDeleteItem('${category.id}')"
+                                        onClick="onDeleteItem('${category.id}', 'category')"
                                         p(classes = "text-md-left") {
                                             span {
                                                 i(classes = "fa fa-trash") {}

@@ -3,6 +3,7 @@ package com.postack.plugins
 import com.postack.domain.controller.CategoryController
 import com.postack.domain.controller.ProductController
 import com.postack.domain.controller.SupplierController
+import com.postack.routes.api.subcategoryRoutes
 import com.postack.routes.authenticationRoute
 import com.postack.routes.categoryRoutes
 import com.postack.routes.dashboard.dashboardRoutes
@@ -28,6 +29,9 @@ fun Application.configureRouting() {
         exception<Throwable> { call, cause ->
             call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
         }
+        status(HttpStatusCode.NotFound) { call, status ->
+            call.respondText(text = "404: Page Not Found", status = status)
+        }
     }
 
     routing {
@@ -49,16 +53,19 @@ fun Application.configureRouting() {
                 categoryController = categoryController,
                 supplierController = supplierController
             )
+
         }
 
         productRoutes(productController = productController)
         categoryRoutes(categoryController = categoryController)
+        subcategoryRoutes(categoryController = categoryController)
         supplierRoutes(supplierController = supplierController)
 
         swaggerUI(
-            path = C.Route.API.V1,
+            path = C.Route.API.CURRENT_VERSION,
             swaggerFile = "${getProjectRoot(DEVELOPMENT)}${Paths.get("src/main/resources/static")}/documentation.yaml"
         ) { version = "4.15.5" }
+
 
         static(C.Route.STATIC) {
             resources("static")

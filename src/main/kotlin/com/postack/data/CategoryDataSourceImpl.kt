@@ -53,14 +53,15 @@ class CategoryDataSourceImpl(
     }
 
     override suspend fun deleteSubcategory(categoryId: String, id: String) {
+
         categoryCollection.find(Category::id eq categoryId).first()?.let {
-            categoryCollection.find(
-                Category::id eq id,
+            categoryCollection.updateOne(
+                filter = Category::id eq it.id,
                 set(
                     Category::subCategory setTo buildList {
                         addAll(it.subCategory.filter { it.id != id })
-                    }
 
+                    }
                 )
             )
         }
