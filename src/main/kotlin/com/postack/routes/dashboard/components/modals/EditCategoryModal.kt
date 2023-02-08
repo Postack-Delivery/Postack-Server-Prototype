@@ -11,12 +11,13 @@ fun MAIN.editCategoryModal() {
     modal(
         title = "Edit Category",
         action = C.Route.API.UPDATE_CATEGORY,
+        formEncType = FormEncType.applicationXWwwFormUrlEncoded,
         identifier = "editCategory"
     ) {
         inputField(
             classes = "row",
             label = "ID",
-            named = "CategoryID",
+            named = "category-Id",
             labelWidth = "sm-2",
             inputWidth = "md-6",
             identifier = "edit-category-id"
@@ -35,10 +36,11 @@ fun MAIN.editCategoryModal() {
 
                 button(classes = "btn btn-danger icon-btn") {
                     id = "delete-subcategory-name$i"
-                    onClick= "onDeleteCategory($i)"
+                    onClick= "onDeleteSubcategory($i)"
                     attributes["type"] = "button"
                     attributes["data-bs-toggle"] = "modal"
                     attributes["data-bs-target"] = "#deleteSubcategoryModal"
+                    hidden = true
                     i(classes = "fa fa-trash") {}
                 }
 

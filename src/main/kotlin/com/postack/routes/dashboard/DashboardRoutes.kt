@@ -83,7 +83,8 @@ fun Route.dashboardRoutes(
                             deleteWarningModal(
                                 title = "Delete Subcategory",
                                 action = C.Route.API.DELETE_SUB_CATEGORY,
-                                identifier = "deleteSubcategoryModal"
+                                identifier = "deleteSubcategoryModal",
+                                FormEncType.applicationXWwwFormUrlEncoded
                             )
                         }
                         unsafe {

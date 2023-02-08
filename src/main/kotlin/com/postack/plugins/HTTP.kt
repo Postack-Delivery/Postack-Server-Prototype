@@ -1,5 +1,6 @@
 package com.postack.plugins
 
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.compression.*
@@ -10,6 +11,9 @@ fun Application.configureHTTP() {
     install(CORS) {
         anyHost()
         allowHeader("*")
+        allowXHttpMethodOverride()
+        allowMethod(HttpMethod.Options)
+        allowSameOrigin = true
     }
 
     install(Compression) {

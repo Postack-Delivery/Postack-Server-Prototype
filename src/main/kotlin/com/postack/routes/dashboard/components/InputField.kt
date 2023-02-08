@@ -29,7 +29,7 @@ fun DIV.inputField(
                     name = named
                 }
             } else {
-                input(classes = "form-control ${if (label == "ID") "disabled" else ""}") {
+                input(classes = "form-control") {
                     id = identifier
                     type = if (label == "ID") InputType.hidden else inputType
                     name = named
