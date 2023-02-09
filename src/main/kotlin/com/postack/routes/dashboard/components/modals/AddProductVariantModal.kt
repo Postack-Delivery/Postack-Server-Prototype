@@ -8,25 +8,21 @@ import kotlinx.html.*
 fun MAIN.addProductVariantModal() {
     modal(
         title = "Add Product Variant",
-        action = "/api/v1/products",
+        action = "/api/v1/products/variant",
         identifier = "addProductVariantModal"
     ) {
-        inputField(label = "Name", named = C.CATEGORY_NAME)
+            inputField(
+                classes = "row",
+                label = "ID",
+                named = "productId",
+                labelWidth = "sm-2",
+                inputWidth = "md-6",
+                identifier = "add-product-variant-product-id"
+            )
 
-        div(classes = "mb-3") {
-            label(classes = "col col-form-label") {
-                +"lat & long"
-                small("text-muted") { +"(comma separated i.e 32º,-12º)" }
-            }
-            div(classes = "col-sm-10") {
-                input(classes = "form-control") {
-                    type = InputType.text
-                    name = C.CATEGORY_SUBCATEGORY
-                }
-            }
-        }
+        productVariantsInputs()
 
-        div(classes = "mb-3") {
+       /* div(classes = "mb-3") {
             inputField(
                 label = "Image",
                 inputWidth = "sm-10",
@@ -40,10 +36,74 @@ fun MAIN.addProductVariantModal() {
                     +" Use current image"
                 }
             }
-        }
+        }*/
     }
 }
 
+fun DIV.productVariantsInputs(vararg ids: String) {
+    div(classes = "container text-left topSpace") {
+        div(classes = "row") {
+            div(classes = "col") {
+                inputField(
+                    classes = "row",
+                    label = "Name",
+                    labelWidth = "sm-4",
+                    inputWidth = "sm-6",
+                    named = C.PRODUCT_PRICE,
+                    inputType = InputType.number,
+                    identifier =  ids.getOrNull(0).orEmpty()
+                )
+                inputField(
+                    classes = "row",
+                    label = "Price",
+                    labelWidth = "sm-4",
+                    inputWidth = "sm-6",
+                    named = C.PRODUCT_PRICE,
+                    inputType = InputType.number,
+                    identifier = ids.getOrNull(1).orEmpty()
+                )
+
+                inputField(
+                    classes = "row",
+                    label = "Weight",
+                    labelWidth = "sm-4",
+                    inputWidth = "sm-6",
+                    named = C.PRODUCT_WEIGHT,
+                    inputType = InputType.number,
+                    identifier = ids.getOrNull(2).orEmpty()
+                )
+
+                inputField(
+                    classes = "row",
+                    label = "Quantity",
+                    labelWidth = "sm-4",
+                    inputWidth = "sm-6",
+                    named = C.PRODUCT_QUANTITY,
+                    inputType = InputType.number,
+                    identifier = ids.getOrNull(3).orEmpty()
+                )
+                inputField(
+                    classes = "row",
+                    label = "Unit-measure",
+                    labelWidth = "sm-4",
+                    inputWidth = "sm-6",
+                    named = C.PRODUCT_UNIT_MEASURE,
+                    identifier = ids.getOrNull(4).orEmpty()
+                )
+
+                inputField(
+                    classes = "row",
+                    label = "Description",
+                    labelWidth = "sm-4",
+                    inputWidth = "sm-10",
+                    named = C.PRODUCT_DESCRIPTION,
+                    isTextArea = true,
+                    identifier = ids.getOrNull(5).orEmpty()
+                )
+            }
+        }
+    }
+}
 
 fun DIV.tag(name: String) {
     unsafe { raw("<! -- $name -->") }

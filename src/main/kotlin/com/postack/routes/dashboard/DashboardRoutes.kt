@@ -65,6 +65,8 @@ fun Route.dashboardRoutes(
                                 action = C.Route.API.UPDATE_SUPPLIER
                             )
                             addProductVariantModal()
+                            removeProductVariant()
+                            editProductModal(categories = categories)
                             deleteWarningModal(
                                 title = "Delete Supplier",
                                 action = C.Route.API.DELETE_SUPPLIER,
