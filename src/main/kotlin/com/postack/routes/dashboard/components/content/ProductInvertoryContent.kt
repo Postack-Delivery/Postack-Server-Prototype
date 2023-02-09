@@ -118,10 +118,9 @@ fun DIV.productInventoryContent(products: ProductResponse) {
                                 div(classes = "btn-group-vertical") {
                                     role = "group"
                                     button(classes = "btn btn-link") {
-                                        onClick =
-                                            "onSubmitVariants(\"${product.name}\", \"${product.variants.map { it.toJsVariant() }}\")"
-
-
+                                        attributes["data-bs-toggle"] = "modal"
+                                        attributes["data-bs-target"] = "#editProductModal"
+                                        onClick = "onSubmitVariants(\"${product.name}\", \"${product.variants.map { it.toJsVariant() }}\")"
                                         p(classes = "text-md-left") {
                                             span {
                                                 i(classes = "fa fa-edit") {}
@@ -131,6 +130,9 @@ fun DIV.productInventoryContent(products: ProductResponse) {
                                         }
                                     }
                                     button(classes = "btn btn-link") {
+                                        attributes["data-bs-toggle"] = "modal"
+                                        attributes["data-bs-target"] = "#addProductVariantModal"
+                                        onClick="onAddProductVariant('${product.id}')"
                                         p(classes = "text-md-left") {
                                             span {
                                                 i(classes = "fa fa-plus-circle") {}
@@ -139,10 +141,22 @@ fun DIV.productInventoryContent(products: ProductResponse) {
                                         }
                                     }
                                     button(classes = "btn btn-link") {
+                                        attributes["data-bs-toggle"] = "modal"
+                                        attributes["data-bs-target"] = "#deleteProductVariantModal"
+                                        onClick="onAddProductVariant('${product.id}')"
                                         p(classes = "text-md-left") {
-                                            attributes["data-bs-toggle"] = "modal"
-                                            attributes["data-bs-target"] = "#deleteProductModal"
-                                            onClick="onDeleteItem('${product.id}', 'product')"
+                                            span {
+                                                i(classes = "fa fa-minus-circle") {}
+                                                +" Remove variant"
+                                            }
+                                        }
+                                    }
+                                    button(classes = "btn btn-link") {
+                                        attributes["data-bs-toggle"] = "modal"
+                                        attributes["data-bs-target"] = "#deleteProductModal"
+                                        onClick="onDeleteItem('${product.id}', 'product')"
+                                        p(classes = "text-md-left") {
+
                                             span {
                                                 i(classes = "fa fa-trash") {}
                                                 +" Delete"
@@ -161,10 +175,7 @@ fun DIV.productInventoryContent(products: ProductResponse) {
                             button(classes = "btn btn-dark") {
                                 attributes["data-bs-toggle"] = "modal"
                                 attributes["data-bs-target"] = "#uploadProductModal"
-
                                 i(classes = "fa fa-plus-circle") {}
-
-
                                 +" Add Product"
                             }
                         }

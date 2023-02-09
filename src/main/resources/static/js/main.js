@@ -1,6 +1,5 @@
 function onSubmitVariants() {
     const result = parseObjectString(arguments[1]);
-    window.alert("Hello " + result);
     const arrayOfVariants = JSON.parse(result)
     console.log(arrayOfVariants[0].id);
 }
@@ -95,7 +94,9 @@ function onSupplierEdit(supplier) {
     id.value = supplier.id;
 }
 
-
+function onAddProductVariant(productId) {
+    console.log(`[onAddProductVariant]-${productId}`)
+}
 
 function onAddSubCategory(categoryId) {
     console.log(`[onAddSubCategory] - ${categoryId}`);
@@ -150,6 +151,8 @@ function onDeleteSubcategory(index) {
     onDeleteItem(category.data[index - 1].id, "subcategory");
     document.getElementById("delete-subcategory-category-id").value = `${category.id}`;
 }
+
+
 
 function onDeleteItem(itemId, name) {
     console.log(`[onDeleteItem] - ${itemId}`);

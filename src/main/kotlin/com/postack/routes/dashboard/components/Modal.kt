@@ -10,6 +10,7 @@ fun MAIN.modal(
     submitLabel: String = "Submit",
     method: FormMethod = FormMethod.post,
     formEncType: FormEncType = FormEncType.multipartFormData,
+    hasSubmitButton: Boolean = true,
     content: DIV.() -> Unit
 ) {
     tag("${title.uppercase()} MODAL")
@@ -34,8 +35,10 @@ fun MAIN.modal(
                         content()
                     }
                     div(classes = "modal-footer") {
-                        submitInput(classes = "btn ${if (submitLabel == "Delete") "btn btn-danger" else "btn-dark"}") {
-                            value = submitLabel
+                        if (hasSubmitButton) {
+                            submitInput(classes = "btn ${if (submitLabel == "Delete") "btn btn-danger" else "btn-dark"}") {
+                                value = submitLabel
+                            }
                         }
                     }
                 }
