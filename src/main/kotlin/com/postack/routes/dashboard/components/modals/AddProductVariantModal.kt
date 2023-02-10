@@ -50,7 +50,7 @@ fun DIV.productVariantsInputs(vararg ids: String) {
                     labelWidth = "sm-4",
                     inputWidth = "sm-6",
                     named = C.PRODUCT_PRICE,
-                    inputType = InputType.number,
+                    inputType = InputType.text,
                     identifier =  ids.getOrNull(0).orEmpty()
                 )
                 inputField(

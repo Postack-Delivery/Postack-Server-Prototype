@@ -16,6 +16,9 @@ data class ProductVariant(
     val rating: Double = 3.5
 
 ) {
+    override fun toString(): String {
+        return "{'id': '$id', 'name': '$uniqueName', 'price': '$price', 'description': '$description', 'image': '$image', 'weight': '$weight', 'unitMeasure': '$unitMeasure', 'quantity': '$quantity', 'rating': '$rating' }"
+    }
     class Builder {
         private var uniqueName: String = ""
         private var price: Double = 0.0
@@ -51,7 +54,7 @@ data class ProductVariant(
         val name: String
     ) {
         override fun toString(): String {
-            return "{'id': '$id', 'name': '$name'}"
+            return "{'id': '$id', 'name': '$name', }"
         }
     }
     fun toJsVariant() = JsVariant(
