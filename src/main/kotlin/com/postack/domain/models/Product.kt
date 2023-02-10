@@ -36,6 +36,10 @@ data class Product(
             variants = variants
         )
     }
+
+    override fun toString(): String {
+        return "{id: '$id', name: '$name', supplier: '$supplier', category: '$category', subCategory: '$subCategory', variants: $variants}"
+    }
 }
 
 

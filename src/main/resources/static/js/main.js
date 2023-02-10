@@ -1,12 +1,4 @@
-function onSubmitVariants() {
-    const result = parseObjectString(arguments[1]);
-    const arrayOfVariants = JSON.parse(result)
-    console.log(arrayOfVariants[0].id);
-}
 
-function parseObjectString() {
-    return JSON.parse(JSON.stringify(arguments[0]))
-}
 
 window.addEventListener('onCategoryChanged', (event) => {
     const selector = document.getElementById('SCSelector');
@@ -83,7 +75,7 @@ triggerTabList.forEach(triggerEl => {
 
 
 function onSupplierEdit(supplier) {
-    console.log(`[TEST] - onUpdate ${supplier.name}`);
+    console.log(`[onSupplierEdit] - ${supplier.name}`);
     const name = document.getElementById('edit-supplier-name');
     name.value = supplier.name;
     const location = document.getElementById('edit-supplier-location');
@@ -92,6 +84,42 @@ function onSupplierEdit(supplier) {
     city.value = supplier.city;
     const id = document.getElementById('edit-supplier-id');
     id.value = supplier.id;
+}
+
+function onEditProduct(product) {
+    console.log(product);
+    const id = document.getElementById('edit-product-id');
+    id.value = product.id;
+    const name = document.getElementById('edit-product-name');
+    name.value = product.name;
+    const selectProductVariant = document.getElementById('select-product-variant');
+    while (selectProductVariant.options.length > 1) {
+        selectProductVariant.remove();
+    }
+    product.variants.forEach((variant) => {
+        var option = document.createElement("option");
+        option.text = variant.name;
+        option.value = variant.name.split(' ')[0];
+        selectProductVariant.add(option);
+    });
+    window.localStorage.setItem("variants", JSON.stringify(product.variants))
+}
+
+function onVariantSelected(i) {
+    const product = JSON.parse(window.localStorage.getItem("variants"))[i - 1]
+    console.log(`Selected Index ${typeof(product.name)}`);
+    const name = document.getElementById('edit-product-variant-name');
+    name.value = product.name;
+    const price = document.getElementById('edit-product-variant-price');
+    price.value = product.price;
+    const weight = document.getElementById('edit-product-variant-weight');
+    weight.value = product.weight;
+    const quantity = document.getElementById('edit-product-variant-quantity');
+    quantity.value = product.quantity;
+    const unit = document.getElementById('edit-product-variant-unit');
+    unit.value = product.unitMeasure;
+    const description = document.getElementById('edit-product-variant-description');
+    description.value = product.description;
 }
 
 function onAddProductVariant(productId) {

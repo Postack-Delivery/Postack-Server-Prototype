@@ -18,22 +18,24 @@ fun MAIN.editProductModal(categories: List<Category>) {
             named = "productId",
             labelWidth = "sm-2",
             inputWidth = "md-6",
-            identifier = "edit-product-product-id"
+            identifier = "edit-product-id"
         )
         inputField(
             classes = "row",
             label = "Name",
             labelWidth = "sm-2",
             inputWidth = "sm-10",
-            named = C.PRODUCT_NAME
+            named = C.PRODUCT_NAME,
+            identifier = "edit-product-name"
         )
         div {
             p(classes = "topSpace") {
                 +"Variant: "
             }
             select(classes = "form-select") {
-                id = "SCSelector"
+                id = "select-product-variant"
                 name = C.PRODUCT_SUB_CATEGORY
+                onChange = "onVariantSelected(document.getElementById(\"select-product-variant\").selectedIndex)"
                 option {
                     hidden = true
                     disabled = true
@@ -43,11 +45,18 @@ fun MAIN.editProductModal(categories: List<Category>) {
                 }
             }
         }
-        productVariantsInputs()
+        productVariantsInputs(
+            "edit-product-variant-name",
+            "edit-product-variant-price",
+            "edit-product-variant-weight",
+            "edit-product-variant-quantity",
+            "edit-product-variant-unit",
+            "edit-product-variant-description",
+        )
         div {
             p(classes = "topSpace") { +"Category: " }
             select(classes = "form-select") {
-                id = "CSelector"
+                id = "edit-category-selector"
                 name = C.PRODUCT_CATEGORY
                 onChange =
                     "window.dispatchEvent(new CustomEvent(" +
@@ -74,7 +83,7 @@ fun MAIN.editProductModal(categories: List<Category>) {
                 +"Sub-Category: "
             }
             select(classes = "form-select") {
-                id = "SCSelector"
+                id = "edit-subcategory-selector"
                 name = C.PRODUCT_SUB_CATEGORY
                 option {
                     hidden = true

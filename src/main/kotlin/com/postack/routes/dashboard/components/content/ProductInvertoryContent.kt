@@ -120,7 +120,7 @@ fun DIV.productInventoryContent(products: ProductResponse) {
                                     button(classes = "btn btn-link") {
                                         attributes["data-bs-toggle"] = "modal"
                                         attributes["data-bs-target"] = "#editProductModal"
-                                        onClick = "onSubmitVariants(\"${product.name}\", \"${product.variants.map { it.toJsVariant() }}\")"
+                                        onClick = "onEditProduct(${product})"
                                         p(classes = "text-md-left") {
                                             span {
                                                 i(classes = "fa fa-edit") {}
