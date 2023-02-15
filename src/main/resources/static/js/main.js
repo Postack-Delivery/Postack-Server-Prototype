@@ -107,7 +107,7 @@ function onEditProduct(product) {
 
 function onVariantSelected(i) {
     const product = JSON.parse(window.localStorage.getItem("variants"))[i - 1]
-    console.log(`Selected Index ${typeof(product.name)}`);
+    console.log(product);
     const name = document.getElementById('edit-product-variant-name');
     name.value = product.name;
     const price = document.getElementById('edit-product-variant-price');
@@ -120,6 +120,7 @@ function onVariantSelected(i) {
     unit.value = product.unitMeasure;
     const description = document.getElementById('edit-product-variant-description');
     description.value = product.description;
+
 }
 
 function onAddProductVariant(productId) {
