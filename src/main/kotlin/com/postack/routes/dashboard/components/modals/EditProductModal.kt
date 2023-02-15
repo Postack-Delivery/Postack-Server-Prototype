@@ -1,12 +1,13 @@
 package com.postack.routes.dashboard.components.modals
 
 import com.postack.domain.models.Category
+import com.postack.domain.models.Supplier
 import com.postack.routes.dashboard.components.inputField
 import com.postack.routes.dashboard.components.modal
 import com.postack.util.C
 import kotlinx.html.*
 
-fun MAIN.editProductModal(categories: List<Category>) {
+fun MAIN.editProductModal(categories: List<Category>, suppliers: List<Supplier>) {
     modal(
         title = "Edit Product",
         action = "/api/v1/products/variant",
@@ -53,6 +54,28 @@ fun MAIN.editProductModal(categories: List<Category>) {
             "edit-product-variant-unit",
             "edit-product-variant-description",
         )
+        div {
+            p(classes = "topSpace") {
+                +"Supplier: "
+            }
+            select(classes = "form-select") {
+                id = "edit-supplier-selector"
+                name = C.PRODUCT_SUPPLIER
+                option {
+                    hidden = true
+                    disabled = true
+                    selected = true
+                    value = ""
+                    +"Select a supplier"
+                }
+                suppliers.forEach { supplier ->
+                    option {
+                        value = supplier.name.split(" ").first().lowercase()
+                        +supplier.name
+                    }
+                }
+            }
+        }
         div {
             p(classes = "topSpace") { +"Category: " }
             select(classes = "form-select") {
