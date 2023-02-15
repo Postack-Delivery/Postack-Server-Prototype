@@ -3,6 +3,7 @@ package com.postack.plugins
 import com.postack.domain.controller.CategoryController
 import com.postack.domain.controller.ProductController
 import com.postack.domain.controller.SupplierController
+import com.postack.routes.api.productVariantRoutes
 import com.postack.routes.api.subcategoryRoutes
 import com.postack.routes.authenticationRoute
 import com.postack.routes.categoryRoutes
@@ -57,8 +58,11 @@ fun Application.configureRouting() {
         }
 
         productRoutes(productController = productController)
+        productVariantRoutes(productController = productController)
+
         categoryRoutes(categoryController = categoryController)
         subcategoryRoutes(categoryController = categoryController)
+
         supplierRoutes(supplierController = supplierController)
 
         swaggerUI(
