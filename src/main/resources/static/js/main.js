@@ -92,16 +92,25 @@ function onEditProduct(product) {
     id.value = product.id;
     const name = document.getElementById('edit-product-name');
     name.value = product.name;
-    const selectProductVariant = document.getElementById('select-product-variant');
-    while (selectProductVariant.options.length > 1) {
-        selectProductVariant.remove();
+    const selectProductVariant = document.getElementById('edit-product-variant-selector');
+    while (selectProductVariant.options.length > 0) {
+        selectProductVariant.remove(0);
     }
+
+    var option = document.createElement("option");
+    option.text = "Select a variant";
+    option.value = "";
+    option.hidden = true;
+    option.hidden = true;
+    selectProductVariant.add(option);
+    selectProductVariant.selectedIndex = 0;
     product.variants.forEach((variant) => {
         var option = document.createElement("option");
         option.text = variant.name;
         option.value = variant.name.split(' ')[0];
         selectProductVariant.add(option);
     });
+
     window.localStorage.setItem("variants", JSON.stringify(product.variants))
 }
 

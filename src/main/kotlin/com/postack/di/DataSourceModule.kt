@@ -9,7 +9,7 @@ import com.postack.domain.data.SupplierDataSource
 import org.koin.dsl.module
 
 val dataSourceModule = module {
-    single<ProductDataSource> {  ProductDataSourceImpl(get()) }
-    single<CategoryDataSource> { CategoryDataSourceImpl(get()) }
-    single<SupplierDataSource> { SupplierDataSourceImpl(get()) }
+    single<ProductDataSource> {  ProductDataSourceImpl(db = get(), cache = get()) }
+    single<CategoryDataSource> { CategoryDataSourceImpl(db = get(), cache = get()) }
+    single<SupplierDataSource> { SupplierDataSourceImpl(db = get(), cache = get()) }
 }

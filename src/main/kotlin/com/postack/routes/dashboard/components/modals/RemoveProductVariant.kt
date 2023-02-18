@@ -20,7 +20,7 @@ fun MAIN.removeProductVariant() {
             inputWidth = "md-6",
             identifier = "delete-variant-product-id"
         )
-        for (i in 1..10) {
+        for (i in 1..8) {
             flexRow(alignment = "justify-content-between", identifier = "subcategory") {
                 inputField(
                     identifier = "delete-variant-name$i",

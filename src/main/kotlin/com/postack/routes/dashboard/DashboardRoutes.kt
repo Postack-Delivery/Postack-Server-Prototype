@@ -29,7 +29,6 @@ fun Route.dashboardRoutes(
             val categories = categoryController.getAllCategories()
             val suppliers = supplierController.getAllSuppliers()
             val adminSession = call.principal<AdminSession>()
-
             if (adminSession?.name?.lowercase()?.startsWith(C.ADMIN_USERNAME) == true) {
                 call.sessions.set(adminSession.copy(count = adminSession.count + 1))
                 call.respondHtml {
@@ -66,10 +65,7 @@ fun Route.dashboardRoutes(
                             )
                             addProductVariantModal()
                             removeProductVariant()
-                            editProductModal(
-                                categories = categories,
-                                suppliers = suppliers
-                            )
+                            editProductModal(suppliers = suppliers, categories = categories)
                             deleteWarningModal(
                                 title = "Delete Supplier",
                                 action = C.Route.API.DELETE_SUPPLIER,

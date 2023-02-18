@@ -72,6 +72,7 @@ fun Application.configureTemplating() {
                 }
                 body {
                     backgroundColor = Color("#f8f9fa")
+                    overflow = Overflow.hidden
                 }
                 ".gray" {
                     backgroundColor = Color("#f8f9fa")
