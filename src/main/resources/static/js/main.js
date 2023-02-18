@@ -1,7 +1,7 @@
 
 
 window.addEventListener('onCategoryChanged', (event) => {
-    const selector = document.getElementById('SCSelector');
+    const selector = document.getElementById(event.detail["id"]);
     while (selector.options.length > 0) {
         selector.remove(0);
     }
@@ -111,25 +111,45 @@ function onEditProduct(product) {
         selectProductVariant.add(option);
     });
 
-    window.localStorage.setItem("variants", JSON.stringify(product.variants))
+    window.localStorage.setItem("productQueuedForEdit", JSON.stringify(product))
 }
 
-function onVariantSelected(i) {
-    const product = JSON.parse(window.localStorage.getItem("variants"))[i - 1]
-    console.log(product);
+function onVariantSelected(i, categories) {
+    const product = JSON.parse(window.localStorage.getItem("productQueuedForEdit"));
+    const productVariant = product.variants[i - 1];
+    console.log(productVariant);
     const name = document.getElementById('edit-product-variant-name');
-    name.value = product.name;
+    name.value = productVariant.name;
     const price = document.getElementById('edit-product-variant-price');
-    price.value = product.price;
+    price.value = productVariant.price;
     const weight = document.getElementById('edit-product-variant-weight');
-    weight.value = product.weight;
+    weight.value = productVariant.weight;
     const quantity = document.getElementById('edit-product-variant-quantity');
-    quantity.value = product.quantity;
+    quantity.value = productVariant.quantity;
     const unit = document.getElementById('edit-product-variant-unit');
-    unit.value = product.unitMeasure;
+    unit.value = productVariant.unitMeasure;
     const description = document.getElementById('edit-product-variant-description');
-    description.value = product.description;
-
+    description.value = productVariant.description;
+    const selectProductSupplier = document.getElementById('edit-product-supplier-selector');
+    for (var i = 0; i < selectProductSupplier.options.length; i++) {
+        if (selectProductSupplier.options[i].value === product.supplier) {
+            selectProductSupplier.selectedIndex = i
+        }
+    }
+    const selectProductCategory = document.getElementById('edit-product-category-selector');
+    for (var i = 0; i < selectProductCategory.options.length; i++) {
+        if (selectProductCategory.options[i].value === product.category) {
+            selectProductCategory.selectedIndex = i
+        }
+    }
+    window.dispatchEvent(new CustomEvent(
+        "onCategoryChanged", { detail: {
+                category: product.category,
+                data: categories,
+                id: "edit-product-subcategory-selector"
+            }
+        }
+    ));
 }
 
 function onAddProductVariant(productId) {

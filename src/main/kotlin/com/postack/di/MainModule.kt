@@ -16,7 +16,7 @@ val mainModule = module {
 
     single<Cache<String, Any>> {
         Cache.Builder()
-            .expireAfterWrite(1.hours)
+            .expireAfterWrite(2.hours)
             .build()
     }
 }
