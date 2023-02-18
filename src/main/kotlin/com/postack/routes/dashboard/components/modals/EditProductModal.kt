@@ -36,7 +36,7 @@ fun MAIN.editProductModal(suppliers: List<Supplier>, categories: List<Category>)
             select(classes = "form-select") {
                 id = "edit-product-variant-selector"
                 name = C.PRODUCT_SUB_CATEGORY
-                onChange = """onVariantSelected(document.getElementById("edit-product-variant-selector").selectedIndex)"""
+                onChange = """onVariantSelected(document.getElementById("edit-product-variant-selector").selectedIndex, $categories)"""
                 option {
                     hidden = true
                     disabled = true
@@ -60,7 +60,7 @@ fun MAIN.editProductModal(suppliers: List<Supplier>, categories: List<Category>)
                 +"Supplier: "
             }
             select(classes = "form-select") {
-                id = "edit-supplier-selector"
+                id = "edit-product-supplier-selector"
                 name = C.PRODUCT_SUPPLIER
                 option {
                     hidden = true
@@ -80,7 +80,7 @@ fun MAIN.editProductModal(suppliers: List<Supplier>, categories: List<Category>)
         div {
             p(classes = "topSpace") { +"Category: " }
             select(classes = "form-select") {
-                id = "edit-category-selector"
+                id = "edit-product-category-selector"
                 name = C.PRODUCT_CATEGORY
                 onChange =
                     """
@@ -88,8 +88,9 @@ fun MAIN.editProductModal(suppliers: List<Supplier>, categories: List<Category>)
                            new CustomEvent(
                                "onCategoryChanged",
                                { detail: { 
-                                   category: document.getElementById("CSelector").value,
-                                    data: $categories 
+                                   category: document.getElementById("edit-product-category-selector").value,
+                                    data: $categories,
+                                    id: 'edit-product-subcategory-selector'
                                   } 
                                }
                            )
@@ -115,7 +116,7 @@ fun MAIN.editProductModal(suppliers: List<Supplier>, categories: List<Category>)
                 +"Sub-Category: "
             }
             select(classes = "form-select") {
-                id = "edit-subcategory-selector"
+                id = "edit-product-subcategory-selector"
                 name = C.PRODUCT_SUB_CATEGORY
                 option {
                     hidden = true
