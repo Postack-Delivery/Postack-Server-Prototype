@@ -5,6 +5,7 @@ import io.ktor.server.application.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.cors.routing.*
+import io.ktor.server.plugins.defaultheaders.*
 
 fun Application.configureHTTP() {
 
@@ -13,7 +14,10 @@ fun Application.configureHTTP() {
         allowHeader("*")
         allowXHttpMethodOverride()
         allowMethod(HttpMethod.Options)
-        allowSameOrigin = true
+    }
+
+    install(DefaultHeaders) {
+        header(HttpHeaders.Referrer, "no-referrer")
     }
 
     install(Compression) {

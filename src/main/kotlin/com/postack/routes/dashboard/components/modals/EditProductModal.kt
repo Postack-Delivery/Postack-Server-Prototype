@@ -7,7 +7,7 @@ import com.postack.routes.dashboard.components.modal
 import com.postack.util.C
 import kotlinx.html.*
 
-fun MAIN.editProductModal(categories: List<Category>, suppliers: List<Supplier>) {
+fun MAIN.editProductModal(suppliers: List<Supplier>, categories: List<Category>) {
     modal(
         title = "Edit Product",
         action = "/api/v1/products/variant",
@@ -16,7 +16,7 @@ fun MAIN.editProductModal(categories: List<Category>, suppliers: List<Supplier>)
         inputField(
             classes = "row",
             label = "ID",
-            named = "productId",
+            named = "ProductId",
             labelWidth = "sm-2",
             inputWidth = "md-6",
             identifier = "edit-product-id"
@@ -34,9 +34,9 @@ fun MAIN.editProductModal(categories: List<Category>, suppliers: List<Supplier>)
                 +"Variant: "
             }
             select(classes = "form-select") {
-                id = "select-product-variant"
+                id = "edit-product-variant-selector"
                 name = C.PRODUCT_SUB_CATEGORY
-                onChange = "onVariantSelected(document.getElementById(\"select-product-variant\").selectedIndex)"
+                onChange = """onVariantSelected(document.getElementById("edit-product-variant-selector").selectedIndex)"""
                 option {
                     hidden = true
                     disabled = true
@@ -46,6 +46,7 @@ fun MAIN.editProductModal(categories: List<Category>, suppliers: List<Supplier>)
                 }
             }
         }
+
         productVariantsInputs(
             "edit-product-variant-name",
             "edit-product-variant-price",
@@ -82,10 +83,18 @@ fun MAIN.editProductModal(categories: List<Category>, suppliers: List<Supplier>)
                 id = "edit-category-selector"
                 name = C.PRODUCT_CATEGORY
                 onChange =
-                    "window.dispatchEvent(new CustomEvent(" +
-                            "\"onCategoryChanged\"," +
-                            "{ detail: { category: document.getElementById(\"CSelector\").value, data: $categories} }" +
-                            "));"
+                    """
+                        window.dispatchEvent(
+                           new CustomEvent(
+                               "onCategoryChanged",
+                               { detail: { 
+                                   category: document.getElementById("CSelector").value,
+                                    data: $categories 
+                                  } 
+                               }
+                           )
+                        );
+                    """.trimIndent()
 
                 option {
                     hidden = true

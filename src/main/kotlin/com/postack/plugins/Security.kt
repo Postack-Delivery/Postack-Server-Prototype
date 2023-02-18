@@ -7,7 +7,6 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 
 data class AdminSession(val name: String, val count: Int) : Principal
-
 fun Application.configureSecurity() {
     install(Sessions) {
         cookie<AdminSession>(C.ADMIN_USERNAME) {
