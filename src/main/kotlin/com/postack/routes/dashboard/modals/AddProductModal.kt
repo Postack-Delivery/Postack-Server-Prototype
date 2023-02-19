@@ -1,4 +1,4 @@
-package com.postack.routes.dashboard.components.modals
+package com.postack.routes.dashboard.modals
 
 import com.postack.domain.models.Category
 import com.postack.routes.dashboard.components.inputField

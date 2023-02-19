@@ -9,6 +9,8 @@ import com.postack.routes.dashboard.components.content.*
 import com.postack.routes.dashboard.components.modals.*
 import com.postack.routes.dashboard.components.navigation.navBar
 import com.postack.routes.dashboard.components.navigation.sideBar
+import com.postack.routes.dashboard.content.*
+import com.postack.routes.dashboard.modals.*
 import com.postack.util.C
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -96,10 +98,10 @@ fun Route.dashboardRoutes(
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>                      
                         """.trimIndent()
                         }
-                        script(type = ScriptType.textJavaScript, src = "/static/js/main.js") {
-                            defer = true
-                        }
-
+                        script(type = ScriptType.textJavaScript, src = "/static/js/dashboard.js") { }
+                        script(type = ScriptType.textJavaScript, src = "/static/js/products.js") { }
+                        script(type = ScriptType.textJavaScript, src = "/static/js/categories.js") { }
+                        script(type = ScriptType.textJavaScript, src = "/static/js/suppliers.js") { }
                     }
                 }
             } else {
