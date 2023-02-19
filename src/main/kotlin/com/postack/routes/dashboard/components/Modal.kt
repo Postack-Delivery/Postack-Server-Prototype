@@ -1,6 +1,6 @@
 package com.postack.routes.dashboard.components
 
-import com.postack.routes.dashboard.components.modals.tag
+import com.postack.routes.dashboard.modals.tag
 import kotlinx.html.*
 
 fun MAIN.modal(

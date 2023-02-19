@@ -1,39 +1,43 @@
-package com.postack.routes.dashboard.components.content
+package com.postack.routes.dashboard.content
 
-import com.postack.domain.models.Supplier
-import com.postack.routes.dashboard.components.modals.tag
+import com.postack.domain.models.Category
+import com.postack.routes.dashboard.modals.tag
 import kotlinx.html.*
 
-fun DIV.productSupplierContent(suppliers: List<Supplier>) {
-    tag("Product Supplier Content".uppercase())
+fun DIV.productCategoriesContent(categories: List<Category>) {
+    tag("Product Categories Content".uppercase())
     div(classes = "tab-pane fade") {
-        id = "product-suppliers"
+        id = "product-categories"
         role = "tabpanel"
-        attributes["aria-labelledby"] = "product-suppliers-tab"
+        attributes["aria-labelledby"] = "product-categories-tab"
         tabIndex = "0"
         div {
 
             h4 {
                 strong {
-                    +"SUPPLIERS"
+                    +"Categories".uppercase()
                 }
             }
             table(classes = "table table-bordered") {
                 thead {
+
+
                     tr {
                         th {
                             attributes["scope"] = "row"
+                            +"Cover"
                         }
                         td {
                             h6 {
-                                strong { +"Supplier" }
+                                strong { +"Category" }
                             }
                         }
                         td {
                             h6 {
-                                strong { +"City" }
+                                strong { +"Sub-Category" }
                             }
                         }
+
                         td {
                             div(classes = "col") {
 
@@ -45,20 +49,23 @@ fun DIV.productSupplierContent(suppliers: List<Supplier>) {
                     }
                 }
                 tbody(classes = "table-group-divider") {
-                    suppliers.forEachIndexed { i, supplier ->
+                    categories.forEach { category ->
                         tr {
-                            th {
+                            th(classes = "text-center") {
                                 attributes["scope"] = "row"
-                                +"${i + 1}"
-                            }
-                            td {
-                                p {
-                                     +supplier.name
+                                img(classes = "center-cropped thumbnail") {
+                                    src = category.cover
                                 }
                             }
                             td {
-                                p {
-                                    +supplier.location.city
+                                p(classes = "text-capitalize") { +category.name }
+                            }
+                            td {
+                                category.subCategory.forEachIndexed { i, subCategory ->
+                                    p(classes = "text-left text-truncate") {
+                                        small(classes = "text-muted") { +"${i + 1}. " }
+                                        span { +subCategory.name }
+                                    }
                                 }
                             }
                             td {
@@ -66,23 +73,35 @@ fun DIV.productSupplierContent(suppliers: List<Supplier>) {
                                     role = "group"
                                     button(classes = "btn btn-link") {
                                         attributes["data-bs-toggle"] = "modal"
-                                        attributes["data-bs-target"] = "#editSupplierModal"
-                                        onClick="onSupplierEdit(${supplier})"
-
+                                        attributes["data-bs-target"] = "#editCategory"
+                                        onClick = "onEditCategory({" +
+                                                "id: '${category.id}', " +
+                                                "label: '${category.name}', " +
+                                                "data: [${category}]" +
+                                            "})"
                                         p(classes = "text-md-left") {
                                             span {
                                                 i(classes = "fa fa-edit") {}
                                                 +" Edit"
                                             }
-
                                         }
                                     }
-
                                     button(classes = "btn btn-link") {
+                                        attributes["data-bs-toggle"] = "modal"
+                                        attributes["data-bs-target"] = "#addSubCategoryModal"
+                                        onClick="onAddSubCategory('${category.id}')"
                                         p(classes = "text-md-left") {
-                                            attributes["data-bs-toggle"] = "modal"
-                                            attributes["data-bs-target"] = "#deleteSupplierModal"
-                                            onClick="onDeleteItem('${supplier.id}', 'supplier')"
+                                            span {
+                                                i(classes = "fa fa-plus-circle") {}
+                                                +" Add sub-category"
+                                            }
+                                        }
+                                    }
+                                    button(classes = "btn btn-link") {
+                                        attributes["data-bs-toggle"] = "modal"
+                                        attributes["data-bs-target"] = "#deleteCategoryModal"
+                                        onClick="onDeleteItem('${category.id}', 'category')"
+                                        p(classes = "text-md-left") {
                                             span {
                                                 i(classes = "fa fa-trash") {}
                                                 +" Delete"
@@ -100,9 +119,9 @@ fun DIV.productSupplierContent(suppliers: List<Supplier>) {
                         td {
                             button(classes = "btn btn-dark") {
                                 attributes["data-bs-toggle"] = "modal"
-                                attributes["data-bs-target"] = "#addSupplierModal"
+                                attributes["data-bs-target"] = "#createCategoryModal"
                                 i(classes = "fa fa-plus-circle") {}
-                                +" Add Supplier"
+                                +" Add Category"
                             }
                         }
                     }

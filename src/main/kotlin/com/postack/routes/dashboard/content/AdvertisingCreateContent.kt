@@ -1,6 +1,6 @@
-package com.postack.routes.dashboard.components.content
+package com.postack.routes.dashboard.content
 
-import com.postack.routes.dashboard.components.modals.tag
+import com.postack.routes.dashboard.modals.tag
 import kotlinx.html.*
 
 fun DIV.advertisingCreateContent() {

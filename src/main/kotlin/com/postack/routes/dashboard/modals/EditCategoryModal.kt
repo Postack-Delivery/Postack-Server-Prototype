@@ -1,30 +1,37 @@
-package com.postack.routes.dashboard.components.modals
+package com.postack.routes.dashboard.modals
 
-import com.postack.routes.dashboard.components.flexRow
+import com.postack.routes.dashboard.components.column
 import com.postack.routes.dashboard.components.inputField
 import com.postack.routes.dashboard.components.modal
+import com.postack.routes.dashboard.components.flexRow
+import com.postack.util.C
 import kotlinx.html.*
 
-fun MAIN.removeProductVariant() {
+fun MAIN.editCategoryModal() {
     modal(
-        "Delete Product Variant",
-    "",
-    "deleteProductVariantModal",
-        hasSubmitButton = false
+        title = "Edit Category",
+        action = C.Route.API.UPDATE_CATEGORY,
+        formEncType = FormEncType.applicationXWwwFormUrlEncoded,
+        identifier = "editCategory"
     ) {
         inputField(
             classes = "row",
             label = "ID",
-            named = "CategoryId",
+            named = "category-Id",
             labelWidth = "sm-2",
             inputWidth = "md-6",
-            identifier = "delete-variant-product-id"
+            identifier = "edit-category-id"
         )
-        for (i in 1..8) {
+        inputField(
+            identifier = "edit-category-name",
+            named = C.CATEGORY_NAME
+        )
+        h6(classes = "text-muted") { +"Sub categories" }
+        for (i in 1..10) {
             flexRow(alignment = "justify-content-between", identifier = "subcategory") {
                 inputField(
-                    identifier = "delete-variant-name$i",
-                    named = "delete-variant-name$i"
+                    identifier = "edit-subcategory-name$i",
+                    named = "edit-subcategory-name$i"
                 )
 
                 button(classes = "btn btn-danger icon-btn") {
@@ -33,12 +40,11 @@ fun MAIN.removeProductVariant() {
                     attributes["type"] = "button"
                     attributes["data-bs-toggle"] = "modal"
                     attributes["data-bs-target"] = "#deleteSubcategoryModal"
-                    hidden = false
+                    hidden = true
                     i(classes = "fa fa-trash") {}
                 }
 
             }
         }
-
     }
 }
