@@ -6,6 +6,7 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.defaultheaders.*
+import io.ktor.server.plugins.methodoverride.*
 
 fun Application.configureHTTP() {
 
@@ -19,6 +20,8 @@ fun Application.configureHTTP() {
     install(DefaultHeaders) {
         header(HttpHeaders.Referrer, "no-referrer")
     }
+
+    install(XHttpMethodOverride)
 
     install(Compression) {
         gzip {

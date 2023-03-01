@@ -5,7 +5,7 @@ import com.postack.routes.dashboard.components.inputField
 import com.postack.routes.dashboard.components.modal
 import kotlinx.html.*
 
-fun MAIN.removeProductVariant() {
+fun MAIN.deleteProductVariantModal() {
     modal(
         "Delete Product Variant",
     "",
@@ -15,12 +15,12 @@ fun MAIN.removeProductVariant() {
         inputField(
             classes = "row",
             label = "ID",
-            named = "CategoryId",
+            named = "ProductId",
             labelWidth = "sm-2",
             inputWidth = "md-6",
             identifier = "delete-variant-product-id"
         )
-        for (i in 1..8) {
+        for (i in 1..12) {
             flexRow(alignment = "justify-content-between", identifier = "subcategory") {
                 inputField(
                     identifier = "delete-variant-name$i",
@@ -28,11 +28,11 @@ fun MAIN.removeProductVariant() {
                 )
 
                 button(classes = "btn btn-danger icon-btn") {
-                    id = "delete-subcategory-name$i"
-                    onClick= "onDeleteSubcategory($i)"
+                    id = "delete-variant-button$i"
+                    onClick= "onDeleteProductVariant(${i - 1})"
                     attributes["type"] = "button"
                     attributes["data-bs-toggle"] = "modal"
-                    attributes["data-bs-target"] = "#deleteSubcategoryModal"
+                    attributes["data-bs-target"] = "#deleteProductVariantModal"
                     hidden = false
                     i(classes = "fa fa-trash") {}
                 }

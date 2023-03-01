@@ -67,9 +67,45 @@ function onVariantSelected(i, categories) {
 }
 
 function onAddProductVariant(productId) {
+    document.getElementById('add-product-variant-product-id').value = productId;
     console.log(`[onAddProductVariant]-${productId}`)
 }
+function onRemoveProductVariant(product) {
+    console.log(`[onDeleteProductVariant]`)
+    console.log(product)
+    window.sessionStorage.setItem("productQueuedForRemoval", JSON.stringify(product));
+    for (var i = 0; i < product.variants.length; i++) {
+        console.log(product.variants[i].name);
 
+        const editName = document.getElementById(`delete-variant-name${i + 1}`);
+        editName.disabled = false;
+        editName.hidden = false;
+        editName.value = product.variants[i].name
+
+        const deleteBtn = document.getElementById(`delete-variant-button${i + 1}`);
+        deleteBtn.hidden = false;
+        deleteBtn.disabled = false;
+
+
+    }
+    for (var i = product.variants.length; i < 12; i++) {
+        const editName = document.getElementById(`delete-variant-name${i + 1}`);
+        const deleteBtn = document.getElementById(`delete-variant-button${i + 1}`);
+        editName.disabled = true;
+        editName.hidden = true;
+        deleteBtn.hidden = true;
+        deleteBtn.disabled = true;
+
+    }
+
+}
+
+function onDeleteProductVariant(index) {
+    const product = JSON.parse(window.sessionStorage.getItem("productQueuedForRemoval"))
+    console.log(`[onDeleteVariant] - ${product.variants[index].name}`);
+    onDeleteItem(product.variants[index].id, "variant");
+    document.getElementById("delete-variant-product-id").value = `${product.id}`;
+}
 editProductModal.addEventListener('hidden.bs.modal', event => {
     document.getElementById('edit-product-variant-name').value = "";
     document.getElementById('edit-product-variant-price').value = "";

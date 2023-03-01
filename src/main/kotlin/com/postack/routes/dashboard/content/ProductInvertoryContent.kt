@@ -143,7 +143,7 @@ fun DIV.productInventoryContent(products: ProductResponse) {
                                     button(classes = "btn btn-link") {
                                         attributes["data-bs-toggle"] = "modal"
                                         attributes["data-bs-target"] = "#deleteProductVariantModal"
-                                        onClick="onAddProductVariant('${product.id}')"
+                                        onClick="onRemoveProductVariant(${product})"
                                         p(classes = "text-md-left") {
                                             span {
                                                 i(classes = "fa fa-minus-circle") {}

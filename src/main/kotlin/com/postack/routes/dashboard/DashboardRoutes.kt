@@ -5,8 +5,6 @@ import com.postack.domain.controller.ProductController
 import com.postack.domain.controller.SupplierController
 import com.postack.plugins.AdminSession
 import com.postack.routes.dashboard.components.head
-import com.postack.routes.dashboard.components.content.*
-import com.postack.routes.dashboard.components.modals.*
 import com.postack.routes.dashboard.components.navigation.navBar
 import com.postack.routes.dashboard.components.navigation.sideBar
 import com.postack.routes.dashboard.content.*
@@ -66,7 +64,7 @@ fun Route.dashboardRoutes(
                                 action = C.Route.API.UPDATE_SUPPLIER
                             )
                             addProductVariantModal()
-                            removeProductVariant()
+                            deleteProductVariantModal()
                             editProductModal(suppliers = suppliers, categories = categories)
                             deleteWarningModal(
                                 title = "Delete Supplier",
@@ -89,6 +87,12 @@ fun Route.dashboardRoutes(
                                 identifier = "deleteSubcategoryModal",
                                 FormEncType.applicationXWwwFormUrlEncoded
                             )
+                            deleteWarningModal(
+                                title = "Delete Product Variant",
+                                action = C.Route.API.DELETE_SUB_CATEGORY,
+                                identifier = "deleteProductVariantModal",
+                                FormEncType.applicationXWwwFormUrlEncoded
+                            )
                         }
                         unsafe {
                             +"""
@@ -98,10 +102,10 @@ fun Route.dashboardRoutes(
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>                      
                         """.trimIndent()
                         }
-                        script(type = ScriptType.textJavaScript, src = "/static/js/dashboard.js") { }
-                        script(type = ScriptType.textJavaScript, src = "/static/js/products.js") { }
-                        script(type = ScriptType.textJavaScript, src = "/static/js/categories.js") { }
-                        script(type = ScriptType.textJavaScript, src = "/static/js/suppliers.js") { }
+                        script(type = ScriptType.textJavaScript, src = "/static/js/dashboard.js") { defer = true }
+                        script(type = ScriptType.textJavaScript, src = "/static/js/products.js") { defer = true }
+                        script(type = ScriptType.textJavaScript, src = "/static/js/categories.js") { defer = true }
+                        script(type = ScriptType.textJavaScript, src = "/static/js/suppliers.js") { defer = true }
                     }
                 }
             } else {
