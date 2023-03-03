@@ -4,19 +4,20 @@ import com.postack.domain.models.Category
 import com.postack.domain.models.Supplier
 import com.postack.routes.dashboard.components.inputField
 import com.postack.routes.dashboard.components.modal
+import com.postack.routes.dashboard.components.productVariantsInputs
 import com.postack.util.C
 import kotlinx.html.*
 
 fun MAIN.editProductModal(suppliers: List<Supplier>, categories: List<Category>) {
     modal(
         title = "Edit Product",
-        action = "/api/v1/products/variant",
+        action = C.Route.API.UPDATE_PRODUCT,
         identifier = "editProductModal"
     ) {
         inputField(
             classes = "row",
             label = "ID",
-            named = "ProductId",
+            named = C.PRODUCT_ID,
             labelWidth = "sm-2",
             inputWidth = "md-6",
             identifier = "edit-product-id"

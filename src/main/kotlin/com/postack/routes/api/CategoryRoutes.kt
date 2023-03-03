@@ -53,7 +53,7 @@ fun Route.categoryRoutes(categoryController: CategoryController) {
                 when (part) {
                     is PartData.FormItem -> {
                         when (part.name) {
-                            "ID" -> call.respond(
+                            C.DELETE_ID -> call.respond(
                                 HttpStatusCode.OK,
                                 categoryController.deleteCategory(part.value)
                             )
@@ -67,10 +67,10 @@ fun Route.categoryRoutes(categoryController: CategoryController) {
         post("/update") {
             val params = call.receiveParameters()
             val categoryBuilder = Category.Builder()
-            val id = params["category-Id"].toString()
-            val categoryName = params["name"].toString()
+            val id = params[C.CATEGORY_ID].toString()
+            val categoryName = params[C.CATEGORY_NAME].toString()
             val subCategory = mutableListOf<SubCategory>()
-            for (i in 1 .. 10) {
+            for (i in 1 .. 12) {
                 if (params["edit-subcategory-name$i"].toString().isNotEmpty()) {
                     subCategory.add(SubCategory(name = params["edit-subcategory-name$i"].toString()))
                 }

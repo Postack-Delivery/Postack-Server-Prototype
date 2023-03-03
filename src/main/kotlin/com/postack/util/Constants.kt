@@ -4,6 +4,7 @@ object C {
     const val DATABASE = "postack_db"
     const val CONNECTION_URL = "mongodb+srv://Postack:Postack2022@postack.mqtqpxy.mongodb.net/?retryWrites=true&w=majority"
 
+    const val PRODUCT_ID = "productId"
     const val PRODUCT_NAME = "name"
     const val PRODUCT_PRICE = "price"
     const val PRODUCT_DESCRIPTION = "description"
@@ -16,6 +17,7 @@ object C {
     const val PRODUCT_IMAGE = "image"
     const val PRODUCT_VARIANT = "variant"
 
+    const val CATEGORY_ID = "categoryId"
     const val CATEGORY_NAME = PRODUCT_NAME
     const val CATEGORY_SUBCATEGORY = PRODUCT_SUB_CATEGORY
     const val CATEGORY_COVER = PRODUCT_IMAGE
@@ -29,6 +31,9 @@ object C {
     const val ADMIN_AUTH = "auth-form"
     const val ADMIN_SESSION = "auth-session"
 
+    const val DELETE_ID = "Id"
+
+
     object Route {
         const val LOGIN = "/login"
         const val DASHBOARD = "/dashboard"
@@ -38,6 +43,11 @@ object C {
             const val PRODUCTS = "$CURRENT_VERSION/products"
             const val DELETE_PRODUCT = "$PRODUCTS/delete"
             const val UPDATE_PRODUCT = "$PRODUCTS/update"
+            const val PRODUCT_VARIANT = "$CURRENT_VERSION/variants"
+            const val ADD_VARIANT = "$PRODUCT_VARIANT/add"
+            const val UPDATE_VARIANT = "$PRODUCT_VARIANT/update"
+            const val DELETE_VARIANT = "$PRODUCT_VARIANT/delete"
+
             const val SUPPLIERS = "$CURRENT_VERSION/suppliers"
             const val UPDATE_SUPPLIER = "$SUPPLIERS/update"
             const val DELETE_SUPPLIER = "$SUPPLIERS/delete"

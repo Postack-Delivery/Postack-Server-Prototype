@@ -17,11 +17,12 @@ fun MAIN.editCategoryModal() {
         inputField(
             classes = "row",
             label = "ID",
-            named = "category-Id",
+            named = C.CATEGORY_ID,
             labelWidth = "sm-2",
             inputWidth = "md-6",
             identifier = "edit-category-id"
         )
+
         inputField(
             identifier = "edit-category-name",
             named = C.CATEGORY_NAME
@@ -36,7 +37,7 @@ fun MAIN.editCategoryModal() {
 
                 button(classes = "btn btn-danger icon-btn") {
                     id = "delete-subcategory-name$i"
-                    onClick= "onDeleteSubcategory($i)"
+                    onClick= "onDeleteSuxbcategory($i)"
                     attributes["type"] = "button"
                     attributes["data-bs-toggle"] = "modal"
                     attributes["data-bs-target"] = "#deleteSubcategoryModal"

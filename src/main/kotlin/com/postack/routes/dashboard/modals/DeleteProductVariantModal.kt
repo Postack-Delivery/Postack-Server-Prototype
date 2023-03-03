@@ -3,23 +3,16 @@ package com.postack.routes.dashboard.modals
 import com.postack.routes.dashboard.components.flexRow
 import com.postack.routes.dashboard.components.inputField
 import com.postack.routes.dashboard.components.modal
+import com.postack.util.C
 import kotlinx.html.*
 
 fun MAIN.deleteProductVariantModal() {
     modal(
         "Delete Product Variant",
-    "",
+    C.Route.API.DELETE_VARIANT,
     "deleteProductVariantModal",
         hasSubmitButton = false
     ) {
-        inputField(
-            classes = "row",
-            label = "ID",
-            named = "ProductId",
-            labelWidth = "sm-2",
-            inputWidth = "md-6",
-            identifier = "delete-variant-product-id"
-        )
         for (i in 1..12) {
             flexRow(alignment = "justify-content-between", identifier = "subcategory") {
                 inputField(

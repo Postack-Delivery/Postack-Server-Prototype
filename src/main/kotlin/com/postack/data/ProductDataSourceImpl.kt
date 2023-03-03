@@ -3,9 +3,13 @@ package com.postack.data
 import com.postack.domain.data.ProductDataSource
 import com.postack.domain.models.Product
 import com.postack.domain.models.ProductResponse
+import com.postack.domain.models.ProductVariant
 import io.github.reactivecircus.cache4k.Cache
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import org.litote.kmongo.eq
+import org.litote.kmongo.set
+import org.litote.kmongo.setTo
+import org.litote.kmongo.setValue
 
 class ProductDataSourceImpl(
     db: CoroutineDatabase,
@@ -85,6 +89,25 @@ class ProductDataSourceImpl(
         productsCollection.deleteOne(Product::id eq id)
         cache.invalidate(ALL_PRODUCTS)
     }
+
+    override suspend fun insertProductVariant(id: String, productVariant: ProductVariant) {
+        productsCollection.findOne( Product::id eq  id)?.variants?.let {
+            productsCollection.updateOne(Product::id eq id, setValue(Product::variants,  buildList {
+                addAll(it)
+                add(productVariant)
+            }))
+        }
+    }
+
+    override suspend fun deleteProductVariant(id: String, variantId: String) {
+        productsCollection.findOne( Product::id eq  id)?.variants?.let {
+            productsCollection.updateOne(Product::id eq id, setValue(Product::variants,  buildList {
+                addAll(it)
+                removeIf {  it.id == variantId }
+            }))
+        }
+    }
+
     companion object {
         const val ALL_PRODUCTS = "all-products"
         const val PRODUCTS_FOR_SUBCATEGORY = "products-for-subcategory"
