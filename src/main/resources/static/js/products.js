@@ -106,6 +106,7 @@ function onDeleteProductVariant(index) {
     onDeleteItem(product.variants[index].id, "variant");
     document.getElementById("delete-variant-product-id").value = `${product.id}`;
 }
+
 editProductModal.addEventListener('hidden.bs.modal', event => {
     document.getElementById('edit-product-variant-name').value = "";
     document.getElementById('edit-product-variant-price').value = "";

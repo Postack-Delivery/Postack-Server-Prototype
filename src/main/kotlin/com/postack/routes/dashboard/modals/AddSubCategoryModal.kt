@@ -10,7 +10,7 @@ fun MAIN.addSubCategoryModal(title: String, action: String, identifier: String) 
         inputField(
             classes = "row",
             label = "ID",
-            named = "ID",
+            named = C.CATEGORY_ID,
             labelWidth = "sm-2",
             inputWidth = "md-6",
             identifier = "category-id"
