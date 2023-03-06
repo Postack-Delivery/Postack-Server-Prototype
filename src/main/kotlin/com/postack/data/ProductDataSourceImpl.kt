@@ -19,12 +19,12 @@ class ProductDataSourceImpl(
 
     override suspend fun insertProduct(product: Product) {
         productsCollection.insertOne(product)
-        cache.invalidate(ALL_PRODUCTS)
+        invalidateCache()
     }
 
     override suspend fun updateProduct(product: Product) {
         productsCollection.updateOne(Product::id eq product.id, product)
-        cache.invalidate(ALL_PRODUCTS)
+        invalidateCache()
     }
 
     override suspend fun getAllProducts(page: Int): ProductResponse {
@@ -87,7 +87,7 @@ class ProductDataSourceImpl(
 
     override suspend fun deleteProduct(id: String) {
         productsCollection.deleteOne(Product::id eq id)
-        cache.invalidate(ALL_PRODUCTS)
+        invalidateCache()
     }
 
     override suspend fun insertProductVariant(id: String, productVariant: ProductVariant) {
@@ -97,6 +97,7 @@ class ProductDataSourceImpl(
                 add(productVariant)
             }))
         }
+        invalidateCache()
     }
 
     override suspend fun deleteProductVariant(id: String, variantId: String) {
@@ -106,6 +107,10 @@ class ProductDataSourceImpl(
                 removeIf {  it.id == variantId }
             }))
         }
+        invalidateCache()
+    }
+    override fun invalidateCache() {
+        cache.invalidate(ALL_PRODUCTS)
     }
 
     companion object {

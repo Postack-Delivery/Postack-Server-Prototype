@@ -10,5 +10,6 @@ interface CategoryDataSource {
     suspend fun getAllCategories(): List<Category>
     suspend fun deleteCategory(id: String)
     suspend fun deleteSubcategory(categoryId: String, id: String)
+    fun invalidateCache()
 
 }

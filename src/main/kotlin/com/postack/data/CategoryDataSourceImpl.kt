@@ -17,7 +17,7 @@ class CategoryDataSourceImpl(
 
     override suspend fun insertCategory(category: Category) {
         categoryCollection.insertOne(category)
-        cache.invalidate(ALL_CATEGORIES)
+        invalidateCache()
     }
 
     override suspend fun getAllCategories(): List<Category> {
@@ -30,7 +30,7 @@ class CategoryDataSourceImpl(
 
     override suspend fun deleteCategory(id: String) {
         categoryCollection.deleteOne(Category::id eq id)
-        cache.invalidate(ALL_CATEGORIES)
+        invalidateCache()
     }
     override suspend fun updateCategory(category: Category) {
         categoryCollection.updateOne(
@@ -40,7 +40,7 @@ class CategoryDataSourceImpl(
                 Category::subCategory setTo category.subCategory
             )
         )
-        cache.invalidate(ALL_CATEGORIES)
+        invalidateCache()
     }
     override suspend fun insertSubCategory(categoryId: String, name: String) {
         categoryCollection.find(Category::id eq categoryId).first()?.let {
@@ -53,7 +53,7 @@ class CategoryDataSourceImpl(
                     }
                 )
             )
-            cache.invalidate(ALL_CATEGORIES)
+            invalidateCache()
         }
     }
 
@@ -68,8 +68,12 @@ class CategoryDataSourceImpl(
                     }
                 )
             )
-            cache.invalidate(ALL_CATEGORIES)
+            invalidateCache()
         }
+    }
+
+    override fun invalidateCache() {
+        cache.invalidate(ALL_CATEGORIES)
     }
 
     companion object {

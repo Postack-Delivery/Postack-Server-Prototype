@@ -7,5 +7,6 @@ interface SupplierDataSource {
     suspend fun getAllSuppliers(): List<Supplier>
     suspend fun updateSupplier(supplier: Supplier)
     suspend fun deleteSupplier(supplier: Supplier)
+    fun invalidateCache()
 
 }
