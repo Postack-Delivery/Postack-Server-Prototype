@@ -17,13 +17,13 @@ class SupplierDataSourceImpl(
     private val supplierCollection = db.getCollection<Supplier>()
     override suspend fun insertSupplier(supplier: Supplier) {
         supplierCollection.insertOne(supplier)
-        cache.invalidate(ALL_SUPPLIER)
+        invalidateCache()
     }
     override suspend fun getAllSuppliers(): List<Supplier> {
-        val cachedSuppliers = cache.get(ALL_SUPPLIER).orEmpty()
+        val cachedSuppliers = cache.get(ALL_SUPPLIERS).orEmpty()
         if (cachedSuppliers.isNotEmpty()) return cachedSuppliers
         val  remoteSuppliers = supplierCollection.find().toList()
-        cache.put(ALL_SUPPLIER, remoteSuppliers)
+        cache.put(ALL_SUPPLIERS, remoteSuppliers)
         return remoteSuppliers
     }
 
@@ -36,14 +36,19 @@ class SupplierDataSourceImpl(
                 Supplier::location / SupplierLocation::city setTo supplier.location.city
             )
         )
-        cache.invalidate(ALL_SUPPLIER)
+        invalidateCache()
     }
 
     override suspend fun deleteSupplier(supplier: Supplier) {
         supplierCollection.deleteOne(Supplier::id eq supplier.id)
-        cache.invalidate(ALL_SUPPLIER)
+        invalidateCache()
     }
+
+    override fun invalidateCache() {
+        cache.invalidate(ALL_SUPPLIERS)
+    }
+
     companion object {
-        const val ALL_SUPPLIER = "supplier"
+        const val ALL_SUPPLIERS = "supplier"
     }
 }

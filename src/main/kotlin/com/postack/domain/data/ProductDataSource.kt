@@ -14,5 +14,5 @@ interface ProductDataSource {
     suspend fun getProductsBySearchTerm(searchTerm: String, page: Int): ProductResponse
     suspend fun deleteProduct(id: String)
     suspend fun deleteProductVariant(id: String, variantId: String)
-
+    fun invalidateCache()
 }
