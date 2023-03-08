@@ -3,7 +3,8 @@ package com.postack.util
 object C {
     const val DATABASE = "postack_db"
     const val CONNECTION_URL = "mongodb+srv://Postack:Postack2022@postack.mqtqpxy.mongodb.net/?retryWrites=true&w=majority"
-
+    const val DOCKER_USERNAME = "mwaibanda1"
+    const val DOCKER_PASSWORD = "DockerHub-1978"
     const val PRODUCT_ID = "productId"
     const val PRODUCT_NAME = "name"
     const val PRODUCT_PRICE = "price"

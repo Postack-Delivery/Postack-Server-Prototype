@@ -9,6 +9,29 @@ plugins {
     id("io.ktor.plugin") version "2.2.1"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.22"
     id("com.google.devtools.ksp") version "1.7.20-1.0.6"
+
+}
+
+ktor {
+    docker {
+        localImageName.set("postack-image")
+        imageTag.set("0.0.1-preview")
+        externalRegistry.set(
+            io.ktor.plugin.features.DockerImageRegistry.dockerHub(
+                appName = provider { "postack" },
+                username = provider { project.ext.get("DOCKER_USERNAME").toString() },
+                password = provider { project.ext.get("DOCKER_PASSWORD").toString() }
+            )
+        )
+        portMappings.set(listOf(
+            io.ktor.plugin.features.DockerPortMapping(
+                80,
+                8080,
+                io.ktor.plugin.features.DockerPortMappingProtocol.TCP
+            )
+        ))
+        jreVersion.set(io.ktor.plugin.features.JreVersion.JRE_17)
+    }
 }
 
 group = "com.postack"
