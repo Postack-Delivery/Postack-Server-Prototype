@@ -19,8 +19,8 @@ ktor {
         externalRegistry.set(
             io.ktor.plugin.features.DockerImageRegistry.dockerHub(
                 appName = provider { "postack" },
-                username = provider { project.ext.get("DOCKER_USERNAME").toString() },
-                password = provider { project.ext.get("DOCKER_PASSWORD").toString() }
+                username = provider { "mwaibanda1" },
+                password = provider { "DockerHub-1978" }
             )
         )
         portMappings.set(listOf(
