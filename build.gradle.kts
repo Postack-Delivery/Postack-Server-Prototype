@@ -1,8 +1,8 @@
-val ktor_version: String by project
-val kotlin_version: String by project
-val logback_version: String by project
-val kmongo_version: String by project
-val koin_version: String by project
+val ktorVersion: String by project
+val kotlinVersion: String by project
+val logbackVersion: String by project
+val kmongoVersion: String by project
+val koinVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.7.22"
@@ -14,22 +14,22 @@ plugins {
 
 ktor {
     docker {
-        localImageName.set("postack-image")
+        localImageName.set("postack")
         imageTag.set("0.0.1-preview")
         externalRegistry.set(
             io.ktor.plugin.features.DockerImageRegistry.dockerHub(
                 appName = provider { "postack" },
-                username = provider { project.ext.get("DOCKER_USERNAME").toString() },
-                password = provider { project.ext.get("DOCKER_PASSWORD").toString() }
+                username = provider { "mwaibanda1" },
+                password = provider { "DockerHub-1978" }
             )
         )
-        portMappings.set(listOf(
-            io.ktor.plugin.features.DockerPortMapping(
-                80,
-                8080,
-                io.ktor.plugin.features.DockerPortMappingProtocol.TCP
-            )
-        ))
+//        portMappings.set(listOf(
+//            io.ktor.plugin.features.DockerPortMapping(
+//                80,
+//                8080,
+//                io.ktor.plugin.features.DockerPortMappingProtocol.TCP
+//            )
+//        ))
         jreVersion.set(io.ktor.plugin.features.JreVersion.JRE_17)
     }
 }
@@ -49,38 +49,38 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-auth-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-sessions-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-status-pages-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-cors-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-websockets-jvm:$ktor_version")
-    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-html-builder-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-auth-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-sessions-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-status-pages-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-cors-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-websockets-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-html-builder-jvm:$ktorVersion")
     implementation("org.jetbrains:kotlin-css-jvm:1.0.0-pre.129-kotlin-1.4.20")
-    implementation("io.ktor:ktor-server-call-logging-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-swagger:$ktor_version")
-    implementation("io.ktor:ktor-server-compression-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-jetty:$ktor_version")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("io.ktor:ktor-server-call-logging-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-swagger:$ktorVersion")
+    implementation("io.ktor:ktor-server-compression-jvm:$ktorVersion")
+    implementation("io.ktor:ktor-server-jetty:$ktorVersion")
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("io.ktor:ktor-server-partial-content-jvm:2.2.1")
-    testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
-    implementation("io.ktor:ktor-server-double-receive:$ktor_version")
-    implementation("io.ktor:ktor-network-tls-certificates:$ktor_version")
-    implementation("io.ktor:ktor-server-partial-content:$ktor_version")
-    implementation("io.ktor:ktor-server-method-override:$ktor_version")
-    implementation("io.ktor:ktor-server-default-headers:$ktor_version")
+    testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
+    implementation("io.ktor:ktor-server-double-receive:$ktorVersion")
+    implementation("io.ktor:ktor-network-tls-certificates:$ktorVersion")
+    implementation("io.ktor:ktor-server-partial-content:$ktorVersion")
+    implementation("io.ktor:ktor-server-method-override:$ktorVersion")
+    implementation("io.ktor:ktor-server-default-headers:$ktorVersion")
     implementation("io.github.reactivecircus.cache4k:cache4k:0.9.0")
 
-    implementation("org.litote.kmongo:kmongo:$kmongo_version")
-    implementation("org.litote.kmongo:kmongo-coroutine:$kmongo_version")
+    implementation("org.litote.kmongo:kmongo:$kmongoVersion")
+    implementation("org.litote.kmongo:kmongo-coroutine:$kmongoVersion")
 
     // Koin core features
-    implementation("io.insert-koin:koin-core:$koin_version")
-    implementation("io.insert-koin:koin-ktor:$koin_version")
-    implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
+    implementation("io.insert-koin:koin-core:$koinVersion")
+    implementation("io.insert-koin:koin-ktor:$koinVersion")
+    implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
 
     implementation("dev.fritz2:core:1.0-RC2")
 
