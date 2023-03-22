@@ -4,9 +4,8 @@ info:
   description: The Postack API provides a Product CRUD Interface
   version: 1.0.0
 servers:
-  - url: 'http://45.79.129.79'
+  - url: 'http://postack.cloud'
   - url: 'http://localhost'
-  - url: 'http://postack.dev'
 paths:
   /api/v1/products:
     post:

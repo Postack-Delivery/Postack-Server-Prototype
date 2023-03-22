@@ -12,6 +12,7 @@ import com.postack.routes.productRoutes
 import com.postack.routes.supplierRoutes
 import com.postack.util.C
 import com.postack.util.Environment.DEVELOPMENT
+import com.postack.util.Environment.PRODUCTION
 import com.postack.util.getProjectRoot
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -67,7 +68,7 @@ fun Application.configureRouting() {
 
         swaggerUI(
             path = C.Route.API.CURRENT_VERSION,
-            swaggerFile = "${getProjectRoot(DEVELOPMENT)}${Paths.get("src/main/resources/static")}/documentation.yaml"
+            swaggerFile = "documentation.yaml"
         ) { version = "4.15.5" }
 
 

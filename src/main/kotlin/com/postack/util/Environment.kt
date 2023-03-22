@@ -5,7 +5,7 @@ enum class Environment {
 }
 fun getProjectRoot(env: Environment): String {
     return when (env) {
-        Environment.DEVELOPMENT -> ""
+        Environment.DEVELOPMENT -> "./"
         Environment.PRODUCTION -> "/root/Postack-Server/"
     }
 }
